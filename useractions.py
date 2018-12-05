@@ -6,11 +6,11 @@ import sqlite3
 app = Flask(__name__)
 
 @app.route('/')
-def insertdb():
+def inserttodb():
 
 
 @app.route('/')
-def updatedb():
+def updatetodb():
 
 
 @app.route('/')
