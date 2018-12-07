@@ -12,3 +12,4 @@ The difficulties that I had so far:
 Questions that I have:
 - I still don't understand what's the right structure of the project, what models should I create? what goes where (db, user's actions..).
 - What exactly I should show every Sunday? and how? because there's not real server here, I'm just executing it locally to test it.
+- Couldn't make git work properly, using manual uploads every time instead (what about github desktop?).
