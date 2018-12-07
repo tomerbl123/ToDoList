@@ -5,11 +5,11 @@ from sqlalchemy.orm import relation, sessionmaker
 Base = declarative_base()
 
 class TasksList(Base):
-	__tablename__='TasksList'
+	__tablename__='alltasks'
 
 	id=Column(Integer, primary_key=True)
 	task=Column(String(255), nullable=False)
-	isdone=Column(String(1), nullable=True)
+	isdone=Column(String(1), nullable=False)
 
 	def __init__(self, task=None, isdone='0'):
 		self.task=task
