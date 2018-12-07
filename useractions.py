@@ -13,8 +13,9 @@ def addtasktodb(task):
 	NewTask = TasksList(task)
 	session.add(NewTask)
 	session.commit()
-	#why it adds the items twice?? what the TasksList class really does?
+	
 addtasktodb('something')
 
+
 if __name__=='__main__':
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)
