@@ -1,0 +1,14 @@
+The difficulties that I had so far:
+- Understanding the difference between SQLAlchemy and Sqlite3.
+- Creating a new DB using SQLAlchemy (why I had to use it? what are the advantages of using it and not sqlite commands directly?).
+  it took me around 4-5hours to do so (had a hard time with the syntax and everything, very hard to understand it).
+- Using the Command Line for everything that i need (even pip install). Installing new packages, defining python3 in the path (instead of
+  python2, which took me a while to understand that im using the wrong version because i forgot to add python3 to the path after installing
+  it) and pip3 as well.
+- Using Git.
+- What should be the structure of the project? What's the smartest thing to start with? (decided to go with the Server first, first of all
+  creating the databse than the functions that run it and then the UI).
+  
+Questions that I have:
+- I still don't understand what's the right structure of the project, what models should I create? what goes where (db, user's actions..).
+- What exactly I should show every Sunday? and how? because there's not real server here, I'm just executing it locally to test it.
