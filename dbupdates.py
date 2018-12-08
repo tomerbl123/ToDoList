@@ -1,19 +1,19 @@
-from dbcreation import TasksList, session
+from flaskapp import *
 
 def addtask(classname,task,isdone='0'):
 	NewTask = classname(task, isdone)
-	session.add(NewTask)
-	session.commit()
+	db.session.add(NewTask)
+	db.session.commit()
 
 def removetask(classname, taskid):
-	q = session.query(classname).filter_by(id=taskid)
+	q = db.session.query(classname).filter_by(id=taskid)
 	q.delete()
-	session.commit()
+	db.session.commit()
 
 def updatetask(classname, taskid, newtask):
-	q = session.query(classname).filter_by(id=taskid)
+	q = db.session.query(classname).filter_by(id=taskid)
 	q.update({classname.task: newtask})
-	session.commit()
+	db.session.commit()
 
 #addtask(TasksList,'asd','1')
 #removetask(TasksList, 1)
