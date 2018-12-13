@@ -16,7 +16,7 @@ def updatetask(class_name, task_id, newtask):
 	db.session.commit()
 
 def getalltasks(class_name):
-	q = db.session.query(class_name.task).all()
+	q = db.session.query(class_name.task, class_name.isdone).all()
 	print(q)
 
 

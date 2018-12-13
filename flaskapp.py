@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 #from dbupdates import *
 
 app=Flask('__name__')
-
 #Changing some basic configurations in the Application.
 app.config.update(
 	SECRET_KEY='topsecret',
@@ -30,9 +29,36 @@ class TasksList(db.Model):
 	def __repr__(self):
 		return 'The id is {}, Task is {}'.format(self.id, self.task)
 
-@app.route('/homepage')
-def hello():
-	return("hello world")
+@app.route('/creating', methods=['POST'])
+def createtask(class_name=TasksList):
+	query_task = request.args.get('task')
+	NewTask = class_name(query_task)
+	db.session.add(NewTask)
+	db.session.commit()
+	return 'Great Success'
+
+@app.route('/removing', methods=['DELETE'])
+def removetask(class_name=TasksList):
+	task_id = request.args.get('task_id')
+	q = db.session.query(class_name).filter_by(id=task_id)
+	q.delete()
+	db.session.commit()
+	return 'Great Success'
+
+@app.route('/updating', methods=['PATCH'])
+def updatetask(class_name=TasksList):
+	task_id = request.args.get('task_id')
+	new_task = request.args.get('new_task')
+	q = db.session.query(class_name).filter_by(id=task_id)
+	q.update({class_name.task: new_task})
+	db.session.commit()
+	return 'Great Success'
+
+@app.route('/gettingall', methods=['GET'])
+def getalltasks(class_name=TasksList):
+	q = db.session.query(class_name.task, class_name.isdone).all()
+	print(q)
+	return 'Great Success'
 
 if __name__=='__main__':
 	db.create_all()
