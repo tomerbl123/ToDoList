@@ -1,0 +1,21 @@
+What I did last week?
+- Created URL to each call (sort of improvement to the CRUD functions that I did last week, because there's 
+  nothing to do with them this way..).
+- Tested each endpoint with POSTMAN - GREAT SUCCESS!
+- Started HTML and CSS short course (done with most of the HTML part).
+- built a tiny homepage to start working with (E2E).
+- Integrated the POST call to the Server.
+
+What are the next steps?
+- Improve the homepage appearance (Adding buttons, text fields and Tasks table).
+- Finish with the Update, Delete and Getalltasks end points (according to the homepage's changes).
+- Finish the CSS part of the course (~1-2 hours).
+- Design the homepage (for fun.).
+
+In the far future??
+- Add Register and Login page.
+- Add Users table.
+- Show the tasks according to the relevant user.
+- Add logs?
+- Add tests?
+- Improving the structure?
