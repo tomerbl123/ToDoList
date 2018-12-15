@@ -29,13 +29,18 @@ class TasksList(db.Model):
 	def __repr__(self):
 		return 'The id is {}, Task is {}'.format(self.id, self.task)
 
+@app.route('/homepage')
+@app.route('/homepage/<name>')
+def home():
+	return render_template('homepage.html')
+
 @app.route('/creating', methods=['POST'])
 def createtask(class_name=TasksList):
-	query_task = request.args.get('task')
+	query_task = request.form['task']
 	NewTask = class_name(query_task)
 	db.session.add(NewTask)
 	db.session.commit()
-	return 'Great Success'
+	return render_template('homepage.html')
 
 @app.route('/removing', methods=['DELETE'])
 def removetask(class_name=TasksList):
