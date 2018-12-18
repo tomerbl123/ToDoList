@@ -1,6 +1,5 @@
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
-#from dbupdates import *
 
 app=Flask('__name__')
 #Changing some basic configurations in the Application.

@@ -4,6 +4,25 @@
 		<title>ToDoList</title>
 
 		<link rel="stylesheet" href="C:\Users\Tomer Ben-Levi\Projects\ToDoList\templates\styles.css">
+
+		<style>
+	        table {
+	            font-family: arial, sans-serif;
+	            border-collapse: collapse;
+	        }
+	        td, th {
+	            border: 1px solid #dddddd;
+	            text-align: left;
+	            padding: 5px;
+	        }
+	      	th.id {
+	      		padding: 5px;
+	      		width: 10%;
+	      	}
+	        tr:nth-child(even) {
+	            background-color: #dddddd;
+	        }
+        </style>
 	</head>
 	<body>
 		<h1>Welcome to your ToDoList</h1>
@@ -22,6 +41,21 @@
 				<input type="submit" value="Save changes">
 				<input type="reset" value="Discard changes" id="hello">
 			</fieldset>
+
+			<br><br>
+
+			<table style="width:100%">
+			  <tr>
+			    <th class='id'>ID</th>
+			    <th class='isdone'>Is Done?</th>
+			    <th class='description'>Description</th>
+			  </tr>
+			  <tr>
+			    <td>Jill</td>
+			    <td>Smith</td> 
+			    <td>50</td>
+			  </tr>
+			</table>
 		</form>
 	</body>
 </html>
