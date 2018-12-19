@@ -1,5 +1,6 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, render_template_string
 from flask_sqlalchemy import SQLAlchemy
+from controllers import static_html_rendering
 
 app=Flask('__name__')
 #Changing some basic configurations in the Application.
@@ -28,10 +29,10 @@ class Tasks(db.Model):
 	def __repr__(self):
 		return 'The id is {}, Task is {}'.format(self.id, self.task)
 
-@app.route('/homepage')
-@app.route('/homepage/<name>')
-def home():
-	return render_template('homepage.html')
+@app.route('/homepage', methods=['GET'])
+def homepage():
+	html_structure = static_html_rendering()
+	return render_template_string(html_structure)
 
 @app.route('/creating', methods=['POST'])
 def create_task(class_name=Tasks):
@@ -57,13 +58,7 @@ def update_task(class_name=Tasks):
 	q.update({class_name.task: new_task})
 	db.session.commit()
 	return 'Great Success'
-
-@app.route('/gettingall', methods=['GET'])
-def get_all_tasks(class_name=Tasks):
-	q = db.session.query(class_name.task, class_name.isdone).all()
-	print(q)
-	return 'Great Success'
-
+	
 if __name__=='__main__':
 	db.create_all()
 	app.run(debug=True, use_reloader=False)
