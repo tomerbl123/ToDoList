@@ -3,7 +3,7 @@ def get_all_tasks(data_base, class_name):
 	get_all_tasks_query = data_base.session.query(class_name.id, class_name.isdone, class_name.task).all()
 	return(get_all_tasks_query)
 
-def static_html_rendering():
+def static_html_string():
 	html_static_part = """
 	<!DOCTYPE html>
 	<html>
@@ -59,7 +59,7 @@ def static_html_rendering():
 	"""
 	return html_static_part
 
-def arrange_tasks_in_html_tr(data_base, class_name):
+def creating_table_rows_string(data_base, class_name):
 	data = data_base.session.query(class_name.id, class_name.isdone, class_name.task).all()
 	tasks_list=[]
 	for item in data:
@@ -71,7 +71,7 @@ def arrange_tasks_in_html_tr(data_base, class_name):
 	#print(html_changing_part)
 	return html_changing_part
 
-def combine_static_html_with_dinamic_rows(html_static_part, html_changing_part):
+def create_full_html_string(html_static_part, html_changing_part):
 	#here we will combine the static html structure with the changing amount of tasks.
 	closer="""</table></form></body></html>"""
 	full_html = html_static_part + html_changing_part + closer
