@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, render_template_string
 from flask_sqlalchemy import SQLAlchemy
-from controllers import static_html_rendering
+from controllers import static_html_rendering, get_all_tasks, arrange_tasks_in_html_tr, combine_static_html_with_dinamic_rows
 
 app=Flask('__name__')
 #Changing some basic configurations in the Application.
@@ -31,8 +31,10 @@ class Tasks(db.Model):
 
 @app.route('/homepage', methods=['GET'])
 def homepage():
-	html_structure = static_html_rendering()
-	return render_template_string(html_structure)
+	html_static_part = static_html_rendering()
+	html_changing_part = arrange_tasks_in_html_tr(db, Tasks)
+	full_html = combine_static_html_with_dinamic_rows(html_static_part, html_changing_part)
+	return render_template_string(full_html)
 
 @app.route('/creating', methods=['POST'])
 def create_task(class_name=Tasks):
@@ -58,7 +60,10 @@ def update_task(class_name=Tasks):
 	q.update({class_name.task: new_task})
 	db.session.commit()
 	return 'Great Success'
-	
+
+#html_static_part=static_html_rendering()
+#html_changing_part=arrange_tasks_in_html_tr(db,Tasks)
+#combine_static_html_with_dinamic_rows(html_static_part, html_changing_part)
 if __name__=='__main__':
 	db.create_all()
 	app.run(debug=True, use_reloader=False)

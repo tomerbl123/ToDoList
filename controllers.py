@@ -1,11 +1,10 @@
-def get_all_tasks():
+def get_all_tasks(data_base, class_name):
 	#here we will get all the tasks.
-	q = db.session.query(class_name.id, class_name.task, class_name.isdone).all()
-	print(q)
-	return(q)
+	get_all_tasks_query = data_base.session.query(class_name.id, class_name.isdone, class_name.task).all()
+	return(get_all_tasks_query)
 
 def static_html_rendering():
-	html_static_part = """\
+	html_static_part = """
 	<!DOCTYPE html>
 	<html>
 		<head>
@@ -60,28 +59,20 @@ def static_html_rendering():
 	"""
 	return html_static_part
 
-def arrange_tasks_in_html_tr():
-	"""
-	here we will take each task and arrange it in table rows.
-					  <tr>
-				    <td>Jill</td>
-				    <td>Smith</td> 
-				    <td>50</td>
-				  </tr>
-	"""
-	for item in q:
-		TBC
-		return(html_changing_part)
+def arrange_tasks_in_html_tr(data_base, class_name):
+	data = data_base.session.query(class_name.id, class_name.isdone, class_name.task).all()
+	tasks_list=[]
+	for item in data:
+		text = "<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>".format(item[0], item[1], item[2])
+		tasks_list.append(text)
+	html_changing_part = ''
+	for item in tasks_list:
+		html_changing_part += item
+	#print(html_changing_part)
+	return html_changing_part
 
-
-def combine_static_html_with_dinamic_rows(html_static_part, html_):
+def combine_static_html_with_dinamic_rows(html_static_part, html_changing_part):
 	#here we will combine the static html structure with the changing amount of tasks.
-	html_static_part
-	html_changing_part
-	closer="""\
-				</table>
-			</form>
-		</body>
-	</html>
-	"""
-	pass
+	closer="""</table></form></body></html>"""
+	full_html = html_static_part + html_changing_part + closer
+	return full_html
