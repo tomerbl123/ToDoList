@@ -36,7 +36,7 @@ def static_html_string():
 					<legend><strong>Adding/Editing Tasks</strong></legend>
 					<div>
 					Description: <input type="text" name="task">
-					<input type="checkbox"> Mark as Done
+					<input type="checkbox" name="isdone" value="yes"> Mark as Done
 					</div>
 					
 					<br><br>
@@ -98,7 +98,11 @@ def get_all_tasks(data_base, class_name):
 	get_all_tasks_query = data_base.session.query(class_name.id, class_name.isdone, class_name.task).all()
 	return(get_all_tasks_query)
 
-def insert_into_db(data_base, task_to_insert, class_name):
-	NewTask = class_name(task_to_insert)
+def insert_into_db(data_base, class_name, task_description_to_insert, task_status_to_insert):
+	if task_status_to_insert == 'yes':
+		task_status_to_insert = '1'
+	else:
+		task_status_to_insert = '0'
+	NewTask = class_name(task_description_to_insert, task_status_to_insert)
 	data_base.session.add(NewTask)
 	data_base.session.commit()

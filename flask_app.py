@@ -10,8 +10,9 @@ def homepage(data_base = db, class_name = Tasks):
 
 @app.route('/creating', methods=['POST'])
 def create_task(data_base = db, class_name = Tasks):
-	task_to_insert = request.form['task']
-	insert_into_db(db, task_to_insert, class_name)
+	task_description_to_insert = request.form.get('task')
+	task_status_to_insert = request.form.get('isdone')
+	insert_into_db(db, class_name, task_description_to_insert, task_status_to_insert)
 	return redirect(url_for('homepage'))
 
 @app.route('/removing', methods=['DELETE'])
