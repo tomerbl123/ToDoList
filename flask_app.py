@@ -1,7 +1,6 @@
 from __init__ import app, db
 from models import Tasks
-from flask import request, render_template_string, render_template, redirect, url_for
-from controllers import static_html_string, creating_table_rows_string, create_full_html_string, get_all_tasks
+from flask import request, redirect, url_for, render_template_string
 from controllers import insert_into_db, return_full_html
 
 @app.route('/homepage', methods=['GET'])
