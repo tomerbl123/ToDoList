@@ -1,48 +1,18 @@
-from flask import Flask, request, render_template, render_template_string
-from flask_sqlalchemy import SQLAlchemy
-from controllers import static_html_string, creating_table_rows_string, create_full_html_string, get_all_tasks
-
-app=Flask('__name__')
-#Changing some basic configurations in the Application.
-app.config.update(
-	SECRET_KEY='topsecret',
-	SQLALCHEMY_DATABASE_URI='sqlite:////Users/Tomer Ben-Levi/Projects/ToDoList/example.db',
-	SQLALCHEMY_TRACK_MODIFICATIONS=False)
-
-db=SQLAlchemy(app)
-
-class Tasks(db.Model):
-	"""
-	This class creates the Tasks table in the DB.
-	There are 3 clomuns here: Task_ID(id), Task_Description(task) and a mark whether the task is done or not (isdone).
-	"""
-	__tablename__ = 'Tasks'
-
-	id=db.Column(db.Integer, primary_key=True)
-	task=db.Column(db.String(255), nullable=False)
-	isdone=db.Column(db.String(1), nullable=True)
-
-	def __init__(self, task=None, isdone='0'):
-		self.task=task
-		self.isdone=isdone
-	
-	def __repr__(self):
-		return 'The id is {}, Task is {}'.format(self.id, self.task)
+from __init__ import app, db
+from models import Tasks
+from flask import request, redirect, url_for, render_template_string
+from controllers import insert_into_db, return_full_html
 
 @app.route('/homepage', methods=['GET'])
-def homepage():
-	html_static_part = static_html_string()
-	html_changing_part = creating_table_rows_string(db, Tasks)
-	full_html = create_full_html_string(html_static_part, html_changing_part)
+def homepage(data_base = db, class_name = Tasks):
+	full_html = return_full_html(data_base, class_name)
 	return render_template_string(full_html)
 
 @app.route('/creating', methods=['POST'])
-def create_task(class_name=Tasks):
-	query_task = request.form['task']
-	NewTask = class_name(query_task)
-	db.session.add(NewTask)
-	db.session.commit()
-	return render_template('homepage.html')
+def create_task(data_base = db, class_name = Tasks):
+	task_to_insert = request.form['task']
+	insert_into_db(db, task_to_insert, class_name)
+	return redirect(url_for('homepage'))
 
 @app.route('/removing', methods=['DELETE'])
 def remove_task(class_name=Tasks):
@@ -64,3 +34,9 @@ def update_task(class_name=Tasks):
 if __name__=='__main__':
 	db.create_all()
 	app.run(debug=True, use_reloader=False)
+
+"""
+WHAT'S NEXT:
+- Add the Remove and Update options - text field with task number maybe.
+- Use Git.
+"""
