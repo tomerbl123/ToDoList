@@ -1,9 +1,14 @@
 def get_all_tasks(data_base, class_name):
-	#here we will get all the tasks.
+	"""
+	This function querying all the taks from Tasks table.
+	"""
 	get_all_tasks_query = data_base.session.query(class_name.id, class_name.isdone, class_name.task).all()
 	return(get_all_tasks_query)
 
 def static_html_string():
+	"""
+	This function defines the static part of the HTML string and return it.
+	"""
 	html_static_part = """
 	<!DOCTYPE html>
 	<html>
@@ -60,6 +65,10 @@ def static_html_string():
 	return html_static_part
 
 def creating_table_rows_string(data_base, class_name):
+	"""
+	This function creates the dynamic part of the HTML String.
+	Meaning, it creates table rows according to the amount of tasks that we have.
+	"""
 	data = data_base.session.query(class_name.id, class_name.isdone, class_name.task).all()
 	tasks_list=[]
 	for item in data:
@@ -68,11 +77,12 @@ def creating_table_rows_string(data_base, class_name):
 	html_changing_part = ''
 	for item in tasks_list:
 		html_changing_part += item
-	#print(html_changing_part)
 	return html_changing_part
 
 def create_full_html_string(html_static_part, html_changing_part):
-	#here we will combine the static html structure with the changing amount of tasks.
+	"""
+	This fuction takes all the parts of the HTML String and combine them into one FULL HTML String.
+	"""
 	closer="""</table></form></body></html>"""
 	full_html = html_static_part + html_changing_part + closer
 	return full_html
