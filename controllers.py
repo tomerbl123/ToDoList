@@ -31,7 +31,7 @@ def static_html_string():
 			<h1>Welcome to your ToDoList</h1>
 			<h2>Here you can add or edit tasks</h2>
 			
-			<form action="homepage" method="post">
+			<form action="creating" method="post">
 				<fieldset>
 					<legend><strong>Adding/Editing Tasks</strong></legend>
 					<div>
@@ -78,6 +78,17 @@ def create_full_html_string(html_static_part, html_changing_part):
 	"""
 	closer="""</table></form></body></html>"""
 	full_html = html_static_part + html_changing_part + closer
+	return full_html
+
+def return_full_html(data_base, class_name):
+	"""
+	This function returns the full HTML String.
+	The purpose here is to be able to call just one function when we want to render 
+	the	Homepage's HTML String (instead of 3 functions)
+	"""
+	html_static_part = static_html_string()
+	html_changing_part = creating_table_rows_string(data_base, class_name)
+	full_html = create_full_html_string(html_static_part, html_changing_part)
 	return full_html
 
 def get_all_tasks(data_base, class_name):

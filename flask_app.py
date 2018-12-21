@@ -1,26 +1,19 @@
 from __init__ import app, db
 from models import Tasks
-from flask import request, render_template_string, render_template
-from controllers import static_html_string, creating_table_rows_string, create_full_html_string, get_all_tasks, insert_into_db
+from flask import request, render_template_string, render_template, redirect, url_for
+from controllers import static_html_string, creating_table_rows_string, create_full_html_string, get_all_tasks
+from controllers import insert_into_db, return_full_html
 
-@app.route('/homepage', methods=['GET', 'POST'])
-def homepage(data_base = db, class_name = Tasks, methods = None):
-	if request.method == 'POST':
-		#Performs the insertion to the DB.
-		task_to_insert = request.form['task']
-		insert_into_db(db, task_to_insert, class_name)
+@app.route('/homepage', methods=['GET'])
+def homepage(data_base = db, class_name = Tasks):
+	full_html = return_full_html(data_base, class_name)
+	return render_template_string(full_html)
 
-		#Reloads the Homepage.
-		html_static_part = static_html_string()
-		html_changing_part = creating_table_rows_string(db, Tasks)
-		full_html = create_full_html_string(html_static_part, html_changing_part)
-		return render_template_string(full_html)
-	else:
-		#Loads the Homepage.
-		html_static_part = static_html_string()
-		html_changing_part = creating_table_rows_string(db, Tasks)
-		full_html = create_full_html_string(html_static_part, html_changing_part)
-		return render_template_string(full_html)
+@app.route('/creating', methods=['POST'])
+def create_task(data_base = db, class_name = Tasks):
+	task_to_insert = request.form['task']
+	insert_into_db(db, task_to_insert, class_name)
+	return redirect(url_for('homepage'))
 
 @app.route('/removing', methods=['DELETE'])
 def remove_task(class_name=Tasks):
@@ -45,7 +38,6 @@ if __name__=='__main__':
 
 """
 WHAT'S NEXT:
-- Fix the bug with the creating page that opens after adding a task and gets stuck.
 - Add the Remove and Update options - text field with task number maybe.
 - Use Git.
 """
