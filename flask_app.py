@@ -1,22 +1,26 @@
 from __init__ import app, db
 from models import Tasks
 from flask import request, render_template_string, render_template
-from controllers import static_html_string, creating_table_rows_string, create_full_html_string, get_all_tasks
+from controllers import static_html_string, creating_table_rows_string, create_full_html_string, get_all_tasks, insert_into_db
 
-@app.route('/homepage', methods=['GET'])
-def homepage():
-	html_static_part = static_html_string()
-	html_changing_part = creating_table_rows_string(db, Tasks)
-	full_html = create_full_html_string(html_static_part, html_changing_part)
-	return render_template_string(full_html)
+@app.route('/homepage', methods=['GET', 'POST'])
+def homepage(data_base = db, class_name = Tasks, methods = None):
+	if request.method == 'POST':
+		#Performs the insertion to the DB.
+		task_to_insert = request.form['task']
+		insert_into_db(db, task_to_insert, class_name)
 
-@app.route('/creating', methods=['POST'])
-def create_task(class_name=Tasks):
-	query_task = request.form['task']
-	NewTask = class_name(query_task)
-	db.session.add(NewTask)
-	db.session.commit()
-	return render_template_string(homepage())
+		#Reloads the Homepage.
+		html_static_part = static_html_string()
+		html_changing_part = creating_table_rows_string(db, Tasks)
+		full_html = create_full_html_string(html_static_part, html_changing_part)
+		return render_template_string(full_html)
+	else:
+		#Loads the Homepage.
+		html_static_part = static_html_string()
+		html_changing_part = creating_table_rows_string(db, Tasks)
+		full_html = create_full_html_string(html_static_part, html_changing_part)
+		return render_template_string(full_html)
 
 @app.route('/removing', methods=['DELETE'])
 def remove_task(class_name=Tasks):

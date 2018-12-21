@@ -1,10 +1,3 @@
-def get_all_tasks(data_base, class_name):
-	"""
-	This function querying all the taks from Tasks table.
-	"""
-	get_all_tasks_query = data_base.session.query(class_name.id, class_name.isdone, class_name.task).all()
-	return(get_all_tasks_query)
-
 def static_html_string():
 	"""
 	This function defines the static part of the HTML string and return it.
@@ -38,7 +31,7 @@ def static_html_string():
 			<h1>Welcome to your ToDoList</h1>
 			<h2>Here you can add or edit tasks</h2>
 			
-			<form action="creating" method="post">
+			<form action="homepage" method="post">
 				<fieldset>
 					<legend><strong>Adding/Editing Tasks</strong></legend>
 					<div>
@@ -86,3 +79,15 @@ def create_full_html_string(html_static_part, html_changing_part):
 	closer="""</table></form></body></html>"""
 	full_html = html_static_part + html_changing_part + closer
 	return full_html
+
+def get_all_tasks(data_base, class_name):
+	"""
+	This function querying all the taks from Tasks table.
+	"""
+	get_all_tasks_query = data_base.session.query(class_name.id, class_name.isdone, class_name.task).all()
+	return(get_all_tasks_query)
+
+def insert_into_db(data_base, task_to_insert, class_name):
+	NewTask = class_name(task_to_insert)
+	data_base.session.add(NewTask)
+	data_base.session.commit()
