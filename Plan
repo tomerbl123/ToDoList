@@ -1,15 +1,14 @@
 What I did last week?
-- Created URL to each call (sort of improvement to the CRUD functions that I did last week, because there's 
-  nothing to do with them this way..).
-- Tested each endpoint with POSTMAN - GREAT SUCCESS!
-- Started HTML and CSS short course (done with most of the HTML part).
-- built a tiny homepage to start working with (E2E).
-- Integrated the POST call to the Server.
+- Changed the project into MVC structure (still not perfect, by WAY better).
+- Created __init__.py file because of circular imports issue. Now this file defines the app and db and we just call it.
+- Switched the .HTML file into HTML String, now it's more dynamic (changes according to the amount of data that we have).
+- Completely finished with the Homepage and Create_Taks options.
+- Fixed a major bug. After every Create_Task we were "stuck" at the /creating endpoint so every Refresh send the POST request again (used
+  redirect option to Homepage after each task creation).
 
 What are the next steps?
-- Improve the homepage appearance (Adding buttons, text fields and Tasks table).
-- Finish with the Update, Delete and Getalltasks end points (according to the homepage's changes).
-- Finish the CSS part of the course (~1-2 hours).
+- Finish with the Update and Delete options.
+- Start using Git (cmd).
 - Design the homepage (for fun.).
 
 In the far future??
