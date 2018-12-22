@@ -29,7 +29,6 @@ def static_html_string():
 		</head>
 		<body>
 			<h1>Welcome to your ToDoList app</h1>
-			<h2>Here you can add new tasks</h2>
 			
 			<form action="creating" method="post">
 				<fieldset>
@@ -47,7 +46,7 @@ def static_html_string():
 				</fieldset>
 
 				<br><br>
-				<h2>Here are your Tasks</h2>
+				<h2>What should I do?</h2>
 
 				<table style="width:100%">
 				  <tr>
@@ -63,7 +62,7 @@ def creating_table_rows_string(data_base, class_name):
 	This function creates the dynamic part of the HTML String.
 	Meaning, it creates table rows according to the amount of tasks that we have.
 	"""
-	data = data_base.session.query(class_name.id, class_name.isdone, class_name.task).all()
+	data = data_base.session.query(class_name.id, class_name.isdone, class_name.task).order_by(class_name.isdone).all()
 	tasks_list=[]
 	for item in data:
 		text = "<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>".format(item[0], item[1], item[2])
