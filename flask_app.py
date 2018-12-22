@@ -1,7 +1,7 @@
 from __init__ import app, db
 from models import Tasks
 from flask import request, redirect, url_for, render_template_string
-from controllers import insert_into_db, return_full_html
+from controllers import insert_into_db, return_full_html, remove_task_from_db, edit_task
 
 @app.route('/homepage', methods=['GET'])
 def homepage(data_base = db, class_name = Tasks):
@@ -11,26 +11,23 @@ def homepage(data_base = db, class_name = Tasks):
 @app.route('/creating', methods=['POST'])
 def create_task(data_base = db, class_name = Tasks):
 	task_description_to_insert = request.form.get('task')
-	task_status_to_insert = request.form.get('isdone')
+	task_status_to_insert = request.form.get('is_done')
 	insert_into_db(db, class_name, task_description_to_insert, task_status_to_insert)
 	return redirect(url_for('homepage'))
 
-@app.route('/removing', methods=['DELETE'])
-def remove_task(class_name=Tasks):
-	task_id = request.args.get('task_id')
-	q = db.session.query(class_name).filter_by(id=task_id)
-	q.delete()
-	db.session.commit()
-	return 'Great Success'
+@app.route('/removing', methods=['POST'])
+def remove_task(data_base = db, class_name = Tasks):
+	task_id = request.form.get('task_id')
+	remove_task_from_db(data_base, class_name, task_id)
+	return redirect(url_for('homepage'))
 
-@app.route('/updating', methods=['PATCH'])
-def update_task(class_name=Tasks):
-	task_id = request.args.get('task_id')
-	new_task = request.args.get('new_task')
-	q = db.session.query(class_name).filter_by(id=task_id)
-	q.update({class_name.task: new_task})
-	db.session.commit()
-	return 'Great Success'
+@app.route('/updating', methods=['POST'])
+def update_task(data_base = db, class_name = Tasks):
+	task_id = request.form.get('task_id')
+	new_task = request.form.get('new_task')
+	is_done = request.form.get('is_done')
+	edit_task(data_base, class_name, task_id, is_done, new_task,)
+	return redirect(url_for('homepage'))
 
 if __name__=='__main__':
 	db.create_all()
@@ -38,6 +35,8 @@ if __name__=='__main__':
 
 """
 WHAT'S NEXT:
-- Add the Remove and Update options - text field with task number maybe.
 - Use Git.
+- Add Validations.
+- Add Unit Tests.
+- Add logs.
 """
