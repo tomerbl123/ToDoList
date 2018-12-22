@@ -5,16 +5,14 @@ What I did last week?
 - Completely finished with the Homepage and Create_Taks options.
 - Fixed a major bug. After every Create_Task we were "stuck" at the /creating endpoint so every Refresh send the POST request again (used
   redirect option to Homepage after each task creation).
+- Done with the Update and Delete options.
+- Design improvements.
+- Separated the tasks table into 2 different table (done and not).
 
 What are the next steps?
-- Finish with the Update and Delete options.
 - Start using Git (cmd).
-- Design the homepage (for fun.).
-
-In the far future??
 - Add Register and Login page.
-- Add Users table.
-- Show the tasks according to the relevant user.
+- Add Users table (and show the tasks accordingly)
 - Add logs?
 - Add tests?
-- Improving the structure?
+- Improving the structure.
