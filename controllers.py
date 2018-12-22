@@ -34,16 +34,67 @@ def static_html_string():
 				<fieldset>
 					<legend><strong>Adding New Task</strong></legend>
 					<div>
-					Description:<br>
-					<textarea rows="3" cols="40" name="task"></textarea><br>
+					Description:
+
+					<br>
+
+					<textarea rows="3" cols="40" name="task"></textarea>
+
+					<br>
+					
 					<input type="checkbox" name="isdone" value="yes"> Mark as Done
 					</div>
 					
-					<br><br>
+					<br>
 
 					<input type="submit" value="Save changes">
 					<input type="reset" value="Discard changes" id="hello">
 				</fieldset>
+			</form>
+				
+				<br>
+
+			<form action="updating" method="put">
+				<fieldset>
+					<legend><strong>Editing a Task</strong></legend>
+					<div>
+					Task's Number(limited to one): <input type="text" name="id">
+
+					<br>
+					Description:
+
+					<br>
+
+					<textarea rows="3" cols="40" name="task"></textarea>
+					
+					<br>
+
+					<input type="checkbox" name="isdone" value="yes"> Mars as Done
+					</div>
+
+					<br>
+
+					<input type="submit" value="Save changes">
+					<input type="reset" value="Discard changes">
+				</fieldset>
+			</form>
+				
+				<br>
+
+			<form action="deleting" method="delete">
+				<fieldset>
+					<legend><strong>Deleting a Task</strong></legend>
+					<div>
+					Task's Number(limited to one): <input type="text" name="id">
+					</div>
+				
+
+				<br>
+
+				<input type="submit" value="Save changes">
+				<input type="reset" value="Discard changes">
+				</fieldset>
+			</form>
 
 				<br><br>
 				<h2>What should I do?</h2>
@@ -84,7 +135,7 @@ def create_full_html_string(html_static_part, html_changing_part):
 	"""
 	This fuction takes all the parts of the HTML String and combine them into one FULL HTML String.
 	"""
-	closer="""</table></form></body></html>"""
+	closer="""</table></body></html>"""
 	full_html = html_static_part + html_changing_part + closer
 	return full_html
 
