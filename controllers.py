@@ -42,7 +42,7 @@ def static_html_string():
 
 					<br>
 					
-					<input type="checkbox" name="isdone" value="yes"> Mark as Done
+					<input type="checkbox" name="is_done" value="yes"> Mark as Done
 					</div>
 					
 					<br>
@@ -54,7 +54,7 @@ def static_html_string():
 				
 				<br>
 
-			<form action="updating" method="put">
+			<form action="updating" method="post">
 				<fieldset>
 					<legend><strong>Editing a Task</strong></legend>
 					<div>
@@ -62,18 +62,18 @@ def static_html_string():
 
 					<br>
 					
-					<input type="text" name="id">
+					<input type="text" name="task_id">
 
 					<br>
 					Description:
 
 					<br>
 
-					<textarea rows="3" cols="40" name="task"></textarea>
+					<textarea rows="3" cols="40" name="new_task"></textarea>
 					
 					<br>
 
-					<input type="checkbox" name="isdone" value="yes"> Mars as Done
+					<input type="checkbox" name="is_done" value="yes"> Mark as Done
 					</div>
 
 					<br>
@@ -127,7 +127,7 @@ def creating_table_rows_string(data_base, class_name):
 		if item[2] == '0':
 			text = "<tr><td>{0}</td><td>{1}</td></tr>".format(item[0], item[1])
 			tasks_list.append(text)
-			if data[counter+1][2] == '1':
+			if data[counter+1][2]:
 				tasks_list.append("""</table><br><h2>Done.</h2><table style="width:100%">
 					<tr><th class='id'>Number</th><th class='description'>Description</th></tr>""")
 		else:
@@ -166,6 +166,9 @@ def get_all_tasks(data_base, class_name):
 	return(get_all_tasks_query)
 
 def insert_into_db(data_base, class_name, task_description_to_insert, task_status_to_insert):
+	"""
+	This function inserts new tasks into the DB.
+	"""
 	if task_status_to_insert == 'yes':
 		task_status_to_insert = '1'
 	else:
@@ -174,7 +177,28 @@ def insert_into_db(data_base, class_name, task_description_to_insert, task_statu
 	data_base.session.add(NewTask)
 	data_base.session.commit()
 
-def remove_from_db(data_base, class_name, task_to_remove):
+def remove_task_from_db(data_base, class_name, task_to_remove):
+	"""
+	This function removes tasks from the DB, by ID.
+	"""
 	get_task_to_remove = data_base.session.query(class_name.id).filter_by(id=task_to_remove)
 	get_task_to_remove.delete()
+	data_base.session.commit()
+
+def edit_task(data_base, class_name, task_to_edit, task_status_to_insert, new_task_description=None):
+	"""
+	This function updates either the task's ID, Description or both.
+	"""
+	if task_status_to_insert == 'yes':
+		task_status_to_insert = '1'
+	else:
+		task_status_to_insert = '0'
+
+	get_task_to_edit = data_base.session.query(class_name.id).filter_by(id=task_to_edit)
+	
+	if len(new_task_description) == 0:
+		get_task_to_edit.update({class_name.isdone: task_status_to_insert})
+	else:	
+		get_task_to_edit.update({class_name.task: new_task_description, class_name.isdone: task_status_to_insert})
+	
 	data_base.session.commit()
