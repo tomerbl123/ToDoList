@@ -9,6 +9,9 @@ def static_html_string():
 			<title>ToDoList</title>
 
 			<style>
+		        body {
+				  background-color: lightgray;
+				}
 		        table {
 		            font-family: arial, sans-serif;
 		            border-collapse: collapse;
