@@ -50,7 +50,7 @@ def static_html_string():
 
 				<table style="width:100%">
 				  <tr>
-				    <th class='id'>ID</th>
+				    <th class='id'>Number</th>
 				    <th class='description'>Description</th>
 				  </tr>
 	"""
@@ -70,7 +70,7 @@ def creating_table_rows_string(data_base, class_name):
 			tasks_list.append(text)
 			if data[counter+1][2] == '1':
 				tasks_list.append("""</table><br><h2>Done.</h2><table style="width:100%">
-					<tr><th class='id'>ID</th><th class='description'>Description</th></tr>""")
+					<tr><th class='id'>Number</th><th class='description'>Description</th></tr>""")
 		else:
 			text = "<tr><td>{0}</td><td>{1}</td></tr>".format(item[0], item[1])
 			tasks_list.append(text)
