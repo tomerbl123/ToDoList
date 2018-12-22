@@ -28,14 +28,15 @@ def static_html_string():
         	</style>
 		</head>
 		<body>
-			<h1>Welcome to your ToDoList</h1>
-			<h2>Here you can add or edit tasks</h2>
+			<h1>Welcome to your ToDoList app</h1>
+			<h2>Here you can add new tasks</h2>
 			
 			<form action="creating" method="post">
 				<fieldset>
-					<legend><strong>Adding/Editing Tasks</strong></legend>
+					<legend><strong>Adding New Task</strong></legend>
 					<div>
-					Description: <input type="text" name="task">
+					Description:<br>
+					<textarea rows="3" cols="40" name="task"></textarea><br>
 					<input type="checkbox" name="isdone" value="yes"> Mark as Done
 					</div>
 					
