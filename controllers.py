@@ -58,7 +58,11 @@ def static_html_string():
 				<fieldset>
 					<legend><strong>Editing a Task</strong></legend>
 					<div>
-					Task's Number(limited to one): <input type="text" name="id">
+					Task's Number(limited to one): 
+
+					<br>
+					
+					<input type="text" name="id">
 
 					<br>
 					Description:
@@ -81,11 +85,15 @@ def static_html_string():
 				
 				<br>
 
-			<form action="deleting" method="delete">
+			<form action="removing" method="post">
 				<fieldset>
 					<legend><strong>Deleting a Task</strong></legend>
 					<div>
-					Task's Number(limited to one): <input type="text" name="id">
+					Task's Number(limited to one): 
+					
+					<br>
+
+					<input type="text" name="task_id">
 					</div>
 				
 
@@ -164,4 +172,9 @@ def insert_into_db(data_base, class_name, task_description_to_insert, task_statu
 		task_status_to_insert = '0'
 	NewTask = class_name(task_description_to_insert, task_status_to_insert)
 	data_base.session.add(NewTask)
+	data_base.session.commit()
+
+def remove_from_db(data_base, class_name, task_to_remove):
+	get_task_to_remove = data_base.session.query(class_name.id).filter_by(id=task_to_remove)
+	get_task_to_remove.delete()
 	data_base.session.commit()

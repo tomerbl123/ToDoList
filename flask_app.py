@@ -1,7 +1,7 @@
 from __init__ import app, db
 from models import Tasks
 from flask import request, redirect, url_for, render_template_string
-from controllers import insert_into_db, return_full_html
+from controllers import insert_into_db, return_full_html, remove_from_db
 
 @app.route('/homepage', methods=['GET'])
 def homepage(data_base = db, class_name = Tasks):
@@ -15,13 +15,11 @@ def create_task(data_base = db, class_name = Tasks):
 	insert_into_db(db, class_name, task_description_to_insert, task_status_to_insert)
 	return redirect(url_for('homepage'))
 
-@app.route('/removing', methods=['DELETE'])
-def remove_task(class_name=Tasks):
-	task_id = request.args.get('task_id')
-	q = db.session.query(class_name).filter_by(id=task_id)
-	q.delete()
-	db.session.commit()
-	return 'Great Success'
+@app.route('/removing', methods=['POST'])
+def remove_task(data_base = db, class_name = Tasks):
+	task_id = request.form.get('task_id')
+	remove_from_db(data_base, class_name, task_id)
+	return redirect(url_for('homepage'))
 
 @app.route('/updating', methods=['PATCH'])
 def update_task(class_name=Tasks):
