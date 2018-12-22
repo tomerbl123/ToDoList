@@ -56,7 +56,7 @@ def static_html_string():
 				  </tr>
 	"""
 	return html_static_part
-
+				  
 def creating_table_rows_string(data_base, class_name):
 	"""
 	This function creates the dynamic part of the HTML String.
@@ -64,9 +64,18 @@ def creating_table_rows_string(data_base, class_name):
 	"""
 	data = data_base.session.query(class_name.id, class_name.isdone, class_name.task).order_by(class_name.isdone).all()
 	tasks_list=[]
+	counter=0
 	for item in data:
-		text = "<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>".format(item[0], item[1], item[2])
-		tasks_list.append(text)
+		if item[1] == '0':
+			text = "<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>".format(item[0], item[1], item[2])
+			tasks_list.append(text)
+			if data[counter+1][1] == '1':
+				tasks_list.append("""</table><br><h2>Done.</h2><table style="width:100%">
+					<tr><th class='id'>ID</th><th class='isdone'>Is Done?</th><th class='description'>Description</th></tr>""")
+		else:
+			text = "<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>".format(item[0], item[1], item[2])
+			tasks_list.append(text)
+		counter+=1
 	html_changing_part = ''
 	for item in tasks_list:
 		html_changing_part += item
