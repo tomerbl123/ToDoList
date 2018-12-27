@@ -1,13 +1,9 @@
 What I did last week?
-- Changed the project into MVC structure (still not perfect, by WAY better).
-- Created __init__.py file because of circular imports issue. Now this file defines the app and db and we just call it.
-- Switched the .HTML file into HTML String, now it's more dynamic (changes according to the amount of data that we have).
-- Completely finished with the Homepage and Create_Taks options.
-- Fixed a major bug. After every Create_Task we were "stuck" at the /creating endpoint so every Refresh send the POST request again (used
-  redirect option to Homepage after each task creation).
-- Done with the Update and Delete options.
-- Design improvements.
-- Separated the tasks table into 2 different table (done and not).
+- read about python packages and modules.
+- installed git and connected it with github (need to start using it, a little complicated. used https://learngitbranching.js.org/)
+- created HTML file (instead of a function that holds the text).
+- removed some unnecessary functions and unified some.
+
 
 What are the next steps?
 - Start using Git (cmd).
@@ -18,9 +14,6 @@ What are the next steps?
 - Improving the structure.
 
 
-
-what is python package and how to use it.
-https://learngitbranching.js.org/
 improve CSS
 modal - create new tasks (JS)
 BOOTSTRAP -> https://getbootstrap.com/docs/4.2/components/buttons/
@@ -28,4 +21,3 @@ Add login page.
 Add users.
 Show tasks per user.
 Add admin page.
-creat HTML file for the static HTML.
