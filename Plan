@@ -21,3 +21,5 @@ Add login page.
 Add users.
 Show tasks per user.
 Add admin page.
+Find a solution for hardcoded URIs.
+Remove the __init__ file and find a better solution.
