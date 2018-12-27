@@ -1,116 +1,3 @@
-def static_html_string():
-	"""
-	This function defines the static part of the HTML string and return it.
-	"""
-	html_static_part = """
-	<!DOCTYPE html>
-	<html>
-		<head>
-			<title>ToDoList</title>
-
-			<style>
-		        body {
-				  background-color: lightgray;
-				}
-		        table {
-		            font-family: arial, sans-serif;
-		            border-collapse: collapse;
-		        }
-		        td, th {
-		            border: 1px solid #dddddd;
-		            text-align: left;
-		            padding: 5px;
-		        }
-		      	th.id {
-		      		padding: 5px;
-		      		width: 10%;
-		      	}
-		        tr:nth-child(even) {
-		            background-color: #dddddd;
-		        }
-        	</style>
-		</head>
-		<body>
-			<h1>Welcome to your ToDoList app</h1>
-			
-			<form action="creating" method="post">
-				<fieldset>
-					<legend><strong>Adding New Task</strong></legend>
-					<div>
-					Description:
-
-					<br>
-
-					<textarea rows="3" cols="40" name="task"></textarea>
-
-					<br>
-					
-					<input type="checkbox" name="is_done" value="yes"> Mark as Done
-					</div>
-					
-					<br>
-
-					<input type="submit" value="Save changes">
-					<input type="reset" value="Discard changes" id="hello">
-				</fieldset>
-			</form>
-				
-				<br>
-
-			<form action="updating" method="post">
-				<fieldset>
-					<legend><strong>Editing a Task</strong></legend>
-					<div>
-					Task's Number(limited to one): 
-
-					<br>
-					
-					<input type="text" name="task_id">
-
-					<br>
-					Description:
-
-					<br>
-
-					<textarea rows="3" cols="40" name="new_task"></textarea>
-					
-					<br>
-
-					<input type="checkbox" name="is_done" value="yes"> Mark as Done
-					</div>
-
-					<br>
-
-					<input type="submit" value="Save changes">
-					<input type="reset" value="Discard changes">
-				</fieldset>
-			</form>
-				
-				<br>
-
-			<form action="removing" method="post">
-				<fieldset>
-					<legend><strong>Deleting a Task</strong></legend>
-					<div>
-					Task's Number(limited to one): 
-					
-					<br>
-
-					<input type="text" name="task_id">
-					</div>
-				
-
-				<br>
-
-				<input type="submit" value="Save changes">
-				<input type="reset" value="Discard changes">
-				</fieldset>
-			</form>
-
-			<br><br>
-	"""
-	return html_static_part
-				  
 def creating_table_rows_string(data_base, class_name):
 	"""
 	This function creates the dynamic part of the HTML String.
@@ -154,31 +41,19 @@ def creating_table_rows_string(data_base, class_name):
 
 	return html_changing_part
 
-def create_full_html_string(html_static_part, html_changing_part):
+def create_and_return_full_html_string(data_base, class_name):
 	"""
 	This fuction takes all the parts of the HTML String and combine them into one FULL HTML String.
 	"""
 	closer="""</body></html>"""
-	full_html = html_static_part + html_changing_part + closer
-	return full_html
 
-def return_full_html(data_base, class_name):
-	"""
-	This function returns the full HTML String.
-	The purpose here is to be able to call just one function when we want to render 
-	the	Homepage's HTML String (instead of 3 functions)
-	"""
-	html_static_part = static_html_string()
+	with open('C:/Users/Tomer Ben-Levi/Projects/ToDoList/templates/homepage.html', "r") as f:
+		text = f.read()
+
 	html_changing_part = creating_table_rows_string(data_base, class_name)
-	full_html = create_full_html_string(html_static_part, html_changing_part)
+	full_html = str(text) + html_changing_part + closer
+	
 	return full_html
-
-def get_all_tasks(data_base, class_name):
-	"""
-	This function querying all the taks from Tasks table.
-	"""
-	get_all_tasks_query = data_base.session.query(class_name.id, class_name.isdone, class_name.task).all()
-	return(get_all_tasks_query)
 
 def insert_into_db(data_base, class_name, task_description_to_insert, task_status_to_insert):
 	"""

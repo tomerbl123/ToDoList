@@ -1,11 +1,11 @@
 from __init__ import app, db
 from models import Tasks
 from flask import request, redirect, url_for, render_template_string
-from controllers import insert_into_db, return_full_html, remove_task_from_db, edit_task
+from controllers import insert_into_db, create_and_return_full_html_string, remove_task_from_db, edit_task
 
 @app.route('/homepage', methods=['GET'])
 def homepage(data_base = db, class_name = Tasks):
-	full_html = return_full_html(data_base, class_name)
+	full_html = create_and_return_full_html_string(data_base, class_name)
 	return render_template_string(full_html)
 
 @app.route('/creating', methods=['POST'])
@@ -32,11 +32,3 @@ def update_task(data_base = db, class_name = Tasks):
 if __name__=='__main__':
 	db.create_all()
 	app.run(debug=True, use_reloader=False)
-
-"""
-WHAT'S NEXT:
-- Use Git.
-- Add Validations.
-- Add Unit Tests.
-- Add logs.
-"""
