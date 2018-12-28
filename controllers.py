@@ -92,3 +92,17 @@ def edit_task(data_base, class_name, task_to_edit, task_status_to_insert, new_ta
 		get_task_to_edit.update({class_name.task: new_task_description, class_name.isdone: task_status_to_insert})
 	
 	data_base.session.commit()
+
+def create_user(data_base, class_name, name, user_name, password):
+	New_User = class_name(name, user_name, password)
+	data_base.session.add(New_User)
+	data_base.session.commit()
+
+def auth(data_base, class_name, user_name, password):
+	password_in_db = data_base.session.query(class_name.password).filter_by(user_name = user_name).all()
+	password_in_db = password_in_db[0][0]
+	
+	if password_in_db == password:
+		return 'Yes'
+	else:
+		return 'No'
