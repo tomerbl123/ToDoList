@@ -4,6 +4,9 @@ from flask import request, redirect, url_for, render_template_string, render_tem
 from controllers import insert_into_db, create_and_return_full_html_string, remove_task_from_db, edit_task, create_user, auth
 
 @app.route('/')
+def redirect_to_login_page():
+	return redirect(url_for('login'))
+
 @app.route('/login')
 def login(data_base = db, class_name = User):
 	return render_template('login.html')
