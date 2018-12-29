@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ToDoList</title>
+
+		<style>
+			body{
+				font-family: Comic Sans MS;
+				background-color: #eee;
+				color: #333;
+				text-align: center;
+			}
+	        table {
+	            border-collapse: collapse;
+	        }
+	        td, th {
+	            border: 2px solid #333;
+	            text-align: center;
+	            padding: 1px;
+	        }
+       	</style>
+	</head>
+
+	<body>
+		<h1>Welcome to your ToDoList app</h1>
+		
+		<form action="creating" method="post">
+				<legend><strong>Adding New Task</strong></legend>
+				<div>
+					Description:
+					<br>
+					<textarea rows="3" cols="40" name="task"></textarea>
+					<br>
+					<!--input type="checkbox" name="is_done" value="yes" MARK AS DONE-->
+				</div>
+				<input type="submit" value="Save changes">
+				<input type="reset" value="Discard changes" id="hello">
+		</form>
+			
+		<br><br><br>
+
+		<form action="updating" method="post">
+				<legend><strong>Editing a Task</strong></legend>
+				<div>
+					Task's Number(limited to one): 
+					<br>
+					<input type="text" name="task_id">
+					<br>
+					Description:
+					<br>
+					<textarea rows="3" cols="40" name="new_task"></textarea>
+					<br>
+					<input type="checkbox" name="is_done" value="yes"> Mark as Done
+				</div>
+				<input type="submit" value="Save changes">
+				<input type="reset" value="Discard changes">
+		</form>
+			
+		<br><br><br>
+		
+		<form action="removing" method="post">
+			<legend><strong>Deleting a Task</strong></legend>
+				<div>
+					Task's Number(limited to one): 
+					<br>
+					<input type="text" name="task_id">
+				</div>
+				<input type="submit" value="Save changes">
+				<input type="reset" value="Discard changes">
+		</form>
+		
+		<br><br><br>
