@@ -1,13 +1,18 @@
-from __init__ import app, db
+from __init__ import db, app
 from models.models import Tasks, User
-from flask import request, redirect, url_for, render_template_string, render_template
-from controllers import insert_into_db, create_and_return_full_html_string, remove_task_from_db, edit_task, create_user, auth
+from flask import request, redirect, url_for, render_template_string, render_template, Response, session, abort
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from controllers import insert_into_db, create_and_return_full_html_string, remove_task_from_db, \
+						edit_task, create_user, auth
 
-@app.route('/')
-def redirect_to_login_page():
-	return redirect(url_for('login'))
+login = LoginManager(app)
+login.init_app(app)
 
-@app.route('/login')
+@login.user_loader
+def load_user(id):
+	return User.query.get(int(id))
+
+@app.route('/login', methods=['GET', 'POST'])
 def login(data_base = db, class_name = User):
 	return render_template('login.html')
 
@@ -16,9 +21,11 @@ def auth_user(data_base = db, class_name = User):
 	user_name = request.form.get('user_name')
 	password = request.form.get('password')
 
+	user = User.query.filter_by(user_name=user_name).first()
 	success_or_not = auth(data_base, class_name, user_name, password)
-	
+
 	if success_or_not == 'Yes':
+		login_user(user)
 		return redirect(url_for('homepage'))
 	else:
 		return redirect(url_for('login'))
@@ -36,6 +43,7 @@ def create_new_user(data_base = db, class_name = User):
 	return redirect(url_for('login'))
 
 @app.route('/homepage', methods=['GET'])
+@login_required
 def homepage(data_base = db, class_name = Tasks):
 	full_html = create_and_return_full_html_string(data_base, class_name)
 	return render_template_string(full_html)
@@ -63,4 +71,4 @@ def update_task(data_base = db, class_name = Tasks):
 
 if __name__=='__main__':
 	db.create_all()
-	app.run(debug=True, use_reloader=False)
+	app.run()

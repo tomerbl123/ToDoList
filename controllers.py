@@ -101,7 +101,6 @@ def create_user(data_base, class_name, name, user_name, password):
 def auth(data_base, class_name, user_name, password):
 	password_in_db = data_base.session.query(class_name.password).filter_by(user_name = user_name).all()
 	password_in_db = password_in_db[0][0]
-	
 	if password_in_db == password:
 		return 'Yes'
 	else:
