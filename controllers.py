@@ -1,12 +1,12 @@
-def creating_table_rows_string(data_base, class_name):
+def creating_table_rows_string(data_base, class_name, the_current_user):
 	"""
 	This function creates the dynamic part of the HTML String.
 	Meaning, it creates table rows according to the amount of tasks that we have.
 	"""
 
 	#Querying the amount of tasks that we have (done and not done).
-	amount_of_not_done_tasks = data_base.session.query(class_name.id, class_name.task, class_name.isdone).filter_by(isdone='0').count()
-	amount_if_done_tasks = data_base.session.query(class_name.id, class_name.task, class_name.isdone).filter_by(isdone='1').count()
+	amount_of_not_done_tasks = data_base.session.query(class_name.id).filter_by(user_id=the_current_user, isdone='0').count()
+	amount_if_done_tasks = data_base.session.query(class_name.id).filter_by(user_id=the_current_user, isdone='1').count()
 	
 	done_tasks_list=[]
 	not_done_tasks_list=[]
@@ -14,7 +14,7 @@ def creating_table_rows_string(data_base, class_name):
 
 	#Creating the NOT Done tasks' table (no tasks -> no table).
 	if amount_of_not_done_tasks > 0:
-		data_not_done = data_base.session.query(class_name.id, class_name.task, class_name.isdone).filter_by(isdone='0')
+		data_not_done = data_base.session.query(class_name.id, class_name.task, class_name.isdone).filter_by(user_id=the_current_user, isdone='0')
 		not_done_tasks_list.append("""<h2>What should I do?</h2><table style="width:100%"><tr><th>Number</th><th>Description</th></tr>""")
 		for item in data_not_done:
 			text = "<tr><td>{0}</td><td>{1}</td></tr>".format(item[0], item[1])
@@ -25,7 +25,7 @@ def creating_table_rows_string(data_base, class_name):
 
 	#Creating the Done tasks' table (no tasks -> no table).
 	if amount_if_done_tasks > 0:
-		data_done = data_base.session.query(class_name.id, class_name.task, class_name.isdone).filter_by(isdone='1')
+		data_done = data_base.session.query(class_name.id, class_name.task, class_name.isdone).filter_by(user_id=the_current_user, isdone='1')
 		done_tasks_list.append("""<h2>Done Tasks:</h2><table style="width:100%"><tr><th>Number</th><th>Description</th></tr>""")
 		for item in data_done:
 			text = "<tr><td>{0}</td><td>{1}</td></tr>".format(item[0], item[1])
@@ -41,7 +41,7 @@ def creating_table_rows_string(data_base, class_name):
 
 	return html_changing_part
 
-def create_and_return_full_html_string(data_base, class_name):
+def create_and_return_full_html_string(data_base, class_name, the_current_user):
 	"""
 	This fuction takes all the parts of the HTML String and combine them into one FULL HTML String.
 	"""
@@ -50,12 +50,12 @@ def create_and_return_full_html_string(data_base, class_name):
 	with open('C:/Users/Tomer Ben-Levi/Projects/ToDoList/templates/homepage.html', "r") as f:
 		text = f.read()
 
-	html_changing_part = creating_table_rows_string(data_base, class_name)
+	html_changing_part = creating_table_rows_string(data_base, class_name, the_current_user)
 	full_html = str(text) + html_changing_part + closer
 	
 	return full_html
 
-def insert_into_db(data_base, class_name, task_description_to_insert, task_status_to_insert):
+def insert_into_db(data_base, class_name, task_description_to_insert, task_status_to_insert, the_current_user):
 	"""
 	This function inserts new tasks into the DB.
 	"""
@@ -63,7 +63,7 @@ def insert_into_db(data_base, class_name, task_description_to_insert, task_statu
 		task_status_to_insert = '1'
 	else:
 		task_status_to_insert = '0'
-	NewTask = class_name(task_description_to_insert, task_status_to_insert)
+	NewTask = class_name(task_description_to_insert, task_status_to_insert, the_current_user)
 	data_base.session.add(NewTask)
 	data_base.session.commit()
 

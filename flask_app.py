@@ -45,14 +45,18 @@ def create_new_user(data_base = db, class_name = User):
 @app.route('/homepage', methods=['GET'])
 @login_required
 def homepage(data_base = db, class_name = Tasks):
-	full_html = create_and_return_full_html_string(data_base, class_name)
+	the_current_user = current_user.id
+	full_html = create_and_return_full_html_string(data_base, class_name, the_current_user)
 	return render_template_string(full_html)
 
 @app.route('/creating', methods=['POST'])
 def create_task(data_base = db, class_name = Tasks):
 	task_description_to_insert = request.form.get('task')
 	task_status_to_insert = request.form.get('is_done')
-	insert_into_db(db, class_name, task_description_to_insert, task_status_to_insert)
+
+	the_current_user = current_user.id
+
+	insert_into_db(data_base, class_name, task_description_to_insert, task_status_to_insert, the_current_user)
 	return redirect(url_for('homepage'))
 
 @app.route('/removing', methods=['POST'])
