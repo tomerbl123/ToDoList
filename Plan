@@ -3,7 +3,9 @@ What I did last week?
 - installed git and connected it with github (need to start using it, a little complicated. used https://learngitbranching.js.org/)
 - created HTML file (instead of a function that holds the text).
 - removed some unnecessary functions and unified some.
-
+- added Login page.
+- added Register page.
+- added User table with foreign_key to the tasks.
 
 What are the next steps?
 - Start using Git (cmd).
@@ -17,9 +19,10 @@ What are the next steps?
 improve CSS
 modal - create new tasks (JS)
 BOOTSTRAP -> https://getbootstrap.com/docs/4.2/components/buttons/
-Add login page.
-Add users.
 Show tasks per user.
 Add admin page.
 Find a solution for hardcoded URIs.
 Remove the __init__ file and find a better solution.
+add session: user can't go to a specific url without login first, adding/removing/editing tasks should be according to the user.
+put the tasks in a different page.
+remove the status option from create task.
