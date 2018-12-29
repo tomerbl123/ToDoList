@@ -1,17 +1,19 @@
 from __init__ import app, db
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 
-class User(db.Model):
+class User(UserMixin, db.Model):
 	"""
 	The users of the system.
 	"""
 	__tablename__ = 'User'
 
 	id = db.Column(db.Integer, primary_key = True)
-	name = db.Column(db.String, nullable = False)
+	name = db.Column(db.String(30), unique = True, nullable = False)
 	user_name = db.Column(db.String, nullable = False)
 	password = db.Column(db.String, nullable = False)
 
-	#db.relationship("Tasks")
+	db.relationship("Tasks")
 
 	def __init__(self, name=None, user_name=None, password=None):
 		self.name=name
@@ -28,12 +30,13 @@ class Tasks(db.Model):
 	id = db.Column(db.Integer, primary_key = True)
 	task = db.Column(db.String(255), nullable = False)
 	isdone = db.Column(db.String(1), nullable = True)
-	#tasks_per_user = db.Column(db.Integer, db.ForeignKey('User.id'))
 
-	def __init__(self, task=None, isdone='0'):
+	user_id = db.Column(db.Integer, db.ForeignKey('User.id'))
+
+	def __init__(self, task=None, isdone='0', user_id=None):
 		self.task=task
 		self.isdone=isdone
-		#self.tasks_per_user=tasks_per_user
+		self.user_id=user_id
 	
 	def __repr__(self):
 		return 'The id is {}, Task is {}'.format(self.id, self.task)
