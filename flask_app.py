@@ -1,5 +1,5 @@
 from __init__ import app, db
-from models import Tasks, User
+from models.models import Tasks, User
 from flask import request, redirect, url_for, render_template_string, render_template
 from controllers import insert_into_db, create_and_return_full_html_string, remove_task_from_db, edit_task, create_user, auth
 
