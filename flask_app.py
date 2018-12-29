@@ -13,8 +13,14 @@ def load_user(id):
 	return User.query.get(int(id))
 
 @app.route('/login', methods=['GET', 'POST'])
-def login(data_base = db, class_name = User):
+def login():
 	return render_template('login.html')
+
+@app.route('/logout')
+@login_required
+def logout():
+	logout_user()
+	return redirect(url_for('login'))
 
 @app.route('/auth', methods=['GET', 'POST'])
 def auth_user(data_base = db, class_name = User):
