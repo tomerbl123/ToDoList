@@ -6,23 +6,27 @@ What I did last week?
 - added Login page.
 - added Register page.
 - added User table with foreign_key to the tasks.
+- created user session (after login, each user sees his own tasks + can't go to specific URLs without Login first).
+- logout button and logic.
+- minor CSS changes - MORE TO COME!
+- removed status option for new tasks.
 
-What are the next steps?
-- Start using Git (cmd).
-- Add Register and Login page.
-- Add Users table (and show the tasks accordingly)
-- Add logs?
-- Add tests?
-- Improving the structure.
+What's next?
+- improve CSS
+- improve the tasks per user design - use modal and not table with numbers.
+- remove the numbers logic, atm the user inserts task's number that he want to edit (we can insert other users tasks this way..).
+- bug fix: If there are no users at all -> the auth() will fail (no password[0][0]).
+- create views.py file and move all the routes to be there.
+- find a solution for hardcoded URIs (settings file?).
+- remove the __init__ file and find a better solution.
+- Add admin page.
 
+ask Yoni:
+- about structure improvements.
+- about packages - should i put my project in the python's location and call it as a package? (this way the __init__ file will work).
+- about requirements file.
+- about settings file.
 
-improve CSS
+read about:
 modal - create new tasks (JS)
 BOOTSTRAP -> https://getbootstrap.com/docs/4.2/components/buttons/
-Show tasks per user.
-Add admin page.
-Find a solution for hardcoded URIs.
-Remove the __init__ file and find a better solution.
-add session: user can't go to a specific url without login first, adding/removing/editing tasks should be according to the user.
-put the tasks in a different page.
-remove the status option from create task.
