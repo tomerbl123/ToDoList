@@ -22,6 +22,7 @@ What's next?
 - remove the __init__ file and find a better solution.
 - Add admin page.
 - algorithm - how long the task is in the system without any change.
+- Lower case usernames.
 
 read about:
 modal - create new tasks (JS)
