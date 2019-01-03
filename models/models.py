@@ -1,4 +1,4 @@
-from run import app, db
+from run import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -8,10 +8,10 @@ class User(UserMixin, db.Model):
 	"""
 	__tablename__ = 'User'
 
-	id = db.Column(db.Integer, primary_key = True)
-	name = db.Column(db.String(30), unique = True, nullable = False)
-	user_name = db.Column(db.String, nullable = False)
-	password = db.Column(db.String, nullable = False)
+	id = db.Column(db.Integer, primary_key = True, autoincrement=True)
+	name = db.Column(db.String(30), nullable = False)
+	user_name = db.Column(db.String(64), nullable = False, unique=True)
+	password = db.Column(db.String(128), nullable = False)
 
 	db.relationship("Tasks")
 
@@ -27,7 +27,7 @@ class Tasks(db.Model):
 	"""
 	__tablename__ = 'Tasks'
 
-	id = db.Column(db.Integer, primary_key = True)
+	id = db.Column(db.Integer, primary_key = True, autoincrement=True)
 	task = db.Column(db.String(255), nullable = False)
 	isdone = db.Column(db.String(1), nullable = True)
 
@@ -37,6 +37,3 @@ class Tasks(db.Model):
 		self.task=task
 		self.isdone=isdone
 		self.user_id=user_id
-	
-	def __repr__(self):
-		return 'The id is {}, Task is {}'.format(self.id, self.task)
