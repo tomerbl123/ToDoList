@@ -1,6 +1,6 @@
 from run import db, app
 from models.models import Tasks, User
-from flask import request, redirect, url_for, render_template_string, render_template, Response, session, abort
+from flask import request, redirect, url_for, render_template_string, render_template
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from controllers import insert_into_db, create_and_return_full_html_string, remove_task_from_db, \
 						edit_task, create_user, auth
@@ -12,7 +12,7 @@ login.init_app(app)
 def load_user(id):
 	return User.query.get(int(id))
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login')
 def login():
 	return render_template('login.html')
 
@@ -22,6 +22,10 @@ def logout():
 	logout_user()
 	return redirect(url_for('login'))
 
+@app.route('/register')
+def register():
+	return render_template('register.html')
+
 @app.route('/auth', methods=['GET', 'POST'])
 def auth_user(data_base = db, class_name = User):
 	user_name = request.form.get('user_name')
@@ -30,15 +34,11 @@ def auth_user(data_base = db, class_name = User):
 	user = User.query.filter_by(user_name=user_name).first()
 	success_or_not = auth(data_base, class_name, user_name, password)
 
-	if success_or_not == 'Yes':
+	if success_or_not:
 		login_user(user)
 		return redirect(url_for('homepage'))
 	else:
 		return redirect(url_for('login'))
-
-@app.route('/register')
-def register(data_base = db, class_name = User):
-	return render_template('register.html')
 
 @app.route('/new_user', methods=['POST'])
 def create_new_user(data_base = db, class_name = User):
@@ -56,6 +56,7 @@ def homepage(data_base = db, class_name = Tasks):
 	return render_template_string(full_html)
 
 @app.route('/creating', methods=['POST'])
+@login_required
 def create_task(data_base = db, class_name = Tasks):
 	task_description_to_insert = request.form.get('task')
 	task_status_to_insert = request.form.get('is_done')
@@ -65,18 +66,20 @@ def create_task(data_base = db, class_name = Tasks):
 	insert_into_db(data_base, class_name, task_description_to_insert, task_status_to_insert, the_current_user)
 	return redirect(url_for('homepage'))
 
-@app.route('/removing', methods=['POST'])
-def remove_task(data_base = db, class_name = Tasks):
-	task_id = request.form.get('task_id')
-	remove_task_from_db(data_base, class_name, task_id)
-	return redirect(url_for('homepage'))
-
 @app.route('/updating', methods=['POST'])
+@login_required
 def update_task(data_base = db, class_name = Tasks):
 	task_id = request.form.get('task_id')
 	new_task = request.form.get('new_task')
 	is_done = request.form.get('is_done')
 	edit_task(data_base, class_name, task_id, is_done, new_task,)
+	return redirect(url_for('homepage'))
+
+@app.route('/removing', methods=['POST'])
+@login_required
+def remove_task(data_base = db, class_name = Tasks):
+	task_id = request.form.get('task_id')
+	remove_task_from_db(data_base, class_name, task_id)
 	return redirect(url_for('homepage'))
 
 if __name__=='__main__':
