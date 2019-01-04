@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html>
+
+<html xmlns="http://www.w3.org/1999/html">
 	<head>
 		<title>ToDoList</title>
 
 		<style>
 			body{
-				font-family: Comic Sans MS;
 				background-color: #eee;
 				color: #333;
-				text-align: center;
 			}
 	        table {
 	            border-collapse: collapse;
@@ -18,64 +17,122 @@
 	            text-align: center;
 	            padding: 1px;
 	        }
-	        .LogOutButton{
+	        #LogOutButton{
 			   position:fixed;
 			   right:10px;
 			   top:5px;
+			}
+			#container {
+				font-family: Comic Sans MS;
+				width: 600px;
+				margin: 0 auto;
+			}
+			h1 {
+				text-align: center
+			}
+			.forms {
+				background-color: #AFEEEE;
+				padding: 10px;
+				font-family: Comic Sans MS;
+				border: solid 1px black;
+			}
+			.forms fieldset {
+				background-color: #F08080;
+				padding: 30px;
+				border: solid 1px white;
+				font-size: 18px;
+			}
+			.forms legend {
+				border: solid 1px #333;
+				background-color: #F08080;
+				padding: 5px;
+				font-size: 20px;
+				fond-weight: bold;
+			}
+			form .text {
+				display: block;
+				margin-bottom: 20px;
+				font-size: 15px;
+				font-family: Helvetica, Arial, sans-serif;
+				border: solid 1px #b90707;
+				background-color: #AFEEEE
+			}
+			.checkbox {
+				float: 5=left;
+				margin-top: 5px;
+			}
+			form input[type="submit"], input[type="reset"] {
+				border: none;
+				background-color: #F5FFFA;
+				height: 25px;
+				padding: 0 15px;
+				font-size: 15px;
 			}
        	</style>
 	</head>
 
 	<body>
-		<h1>Welcome to your ToDoList app</h1>
-		
-		<form action="creating" method="post">
-				<legend><strong>Adding New Task</strong></legend>
-				<div>
-					Description:
-					<br>
-					<textarea rows="3" cols="40" name="task"></textarea>
-					<br>
-					<!--input type="checkbox" name="is_done" value="yes" MARK AS DONE-->
-				</div>
-				<input type="submit" value="Save changes">
-				<input type="reset" value="Discard changes" id="hello">
-		</form>
-			
+
+		<div id="container">
+			<h1>Welcome to your ToDoList app</h1>
+
+			<form class="forms" action="creating" method="post">
+				<fieldset>
+					<legend><strong>Add New Task</strong></legend>
+
+					<label for="task_content">Description:</label>
+					<textarea class="text" rows="4" cols="50" name="task" id="task_content"></textarea>
+
+					<input class="buttons" type="submit" value="Save changes">
+					<input class="buttons" type="reset" value="Discard changes">
+				</fieldset>
+			</form>
+		</div>
+
 		<br><br><br>
 
-		<form action="updating" method="post">
-				<legend><strong>Editing a Task</strong></legend>
-				<div>
-					Task's Number(limited to one): 
-					<br>
-					<input type="text" name="task_id">
-					<br>
-					Description:
-					<br>
-					<textarea rows="3" cols="40" name="new_task"></textarea>
-					<br>
-					<input type="checkbox" name="is_done" value="yes"> Mark as Done
-				</div>
-				<input type="submit" value="Save changes">
-				<input type="reset" value="Discard changes">
-		</form>
-			
-		<br><br><br>
-		
-		<form action="removing" method="post">
-			<legend><strong>Deleting a Task</strong></legend>
-				<div>
-					Task's Number(limited to one): 
-					<br>
-					<input type="text" name="task_id">
-				</div>
-				<input type="submit" value="Save changes">
-				<input type="reset" value="Discard changes">
-		</form>
+		<div id="container">
+			<form class="forms" action="updating" method="post">
+				<fieldset>
+					<legend><strong>Editing a Task</strong></legend>
 
-		<form action="logout">
-		  <input class="LogOutButton" type="submit" value="Logout">
-		</form>
+					<label>Task's Number(limited to one):</label>
+					<input class="text" type="text" name="task_id">
+
+					<label>Description:</label>
+					<textarea class="text" rows="4" cols="50" name="new_task"></textarea>
+
+					<input class="checkbox" type="checkbox" name="is_done" value="yes">
+					<label>Mark as Done</label>
+
+					<br><br>
+
+					<input class="buttons" type="submit" value="Save changes">
+					<input class="buttons" type="reset" value="Discard changes">
+				</fieldset>
+			</form>
+		</div>
+
+		<br><br><br>
+
+		<div id="container">
+			<form class="forms" action="removing" method="post">
+				<fieldset>
+					<legend><strong>Deleting a Task</strong></legend>
+
+					<label>Task's Number(limited to one):</label>
+					<input class="text" type="text" name="task_id">
+
+					<input class="buttons" type="submit" value="Save changes">
+					<input class="buttons" type="reset" value="Discard changes">
+				</fieldset>
+			</form>
+		</div>
+
+		<div>
+			<form action="logout">
+				<input formaction="logout" class="buttons" id="LogOutButton" type="submit" value="Logout">
+			</form>
+		</div>
 
 		<br><br><br>
