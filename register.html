@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Registration</title>
+	
+		<style>
+			body{
+				background-color: #eee;
+				color: #333;
+			}
+			#container {
+				font-family: Comic Sans MS;
+				width: 600px;
+				margin: 0 auto;
+			}
+			.forms {
+				background-color: #AFEEEE;
+				padding: 10px;
+				font-family: Comic Sans MS;
+				border: solid 1px black;
+			}
+			.forms fieldset {
+				background-color: #F08080;
+				padding: 30px;
+				border: solid 1px white;
+				font-size: 18px;
+			}
+			.forms legend {
+				border: solid 1px #333;
+				background-color: #F08080;
+				padding: 5px;
+				font-size: 20px;
+				fond-weight: bold;
+			}
+			form .text {
+				display: block;
+				margin-bottom: 20px;
+				font-size: 15px;
+				font-family: Helvetica, Arial, sans-serif;
+				border: solid 1px #b90707;
+				background-color: #FFF5EE
+			}
+			form input[type="submit"], input[type="reset"] {
+				border: none;
+				background-color: #FFF5EE;
+				height: 25px;
+				padding: 0 15px;
+				font-size: 15px;
+				font-family: Comic Sans MS;
+				cursor: pointer;
+			}
+       	</style>
+	</head>
+
+	<body>	
+		<div id="container">
+			<form action="new_user" method="post" class="forms">
+				<fieldset>
+					<legend><strong>Please fill in the details below</strong></legend>
+
+					<label for="name">Name</label>
+					<input class="text" type="text" name="name" id="name">
+
+					<label for="username">Username</label>
+					<input class="text" type="text" name="user_name" id="username">
+
+					<label for="password">Password</label><br>
+					<input class="text" type="password" name="password" id="password">
+
+					<br>
+
+					<input type="submit" value="Register">
+					<input type="reset" value="Discard">
+				</fieldset>
+			</form>
+		</div>
+	</body>

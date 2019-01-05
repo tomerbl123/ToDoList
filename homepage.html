@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>ToDoList</title>
+
+		<style>
+			body{
+				background-color: #eee;
+				color: #333;
+				text-align: center
+				font-family: Comic sans MS;
+			}
+	        #LogOutButton{
+			   position:fixed;
+			   right:10px;
+			   top:5px;
+			}
+			#container {
+				font-family: Comic Sans MS;
+				width: 450px;
+				margin: 0 auto;
+			}
+			h1, h2 {
+				text-align: center
+				font-family: Comic sans MS;
+			}
+			.forms {
+				background-color: #AFEEEE;
+				padding: 10px;
+				font-family: Comic Sans MS;
+				border: solid 1px black;
+			}
+			.forms fieldset {
+				background-color: #F08080;
+				padding: 30px;
+				border: solid 1px white;
+				font-size: 18px;
+			}
+			.forms legend {
+				border: solid 1px #333;
+				background-color: #F08080;
+				padding: 5px;
+				font-size: 20px;
+				fond-weight: bold;
+			}
+			form .text {
+				display: block;
+				margin-bottom: 20px;
+				font-size: 15px;
+				font-family: Helvetica, Arial, sans-serif;
+				border: solid 1px #b90707;
+				background-color: #FFF5EE
+			}
+			.checkbox {
+				float: 5=left;
+				margin-top: 5px;
+			}
+			form input[type="submit"], input[type="reset"], .buttons {
+				border: none;
+				background-color: #FFF5EE;
+				height: 25px;
+				padding: 0 15px;
+				font-size: 15px;
+				font-family: Comic Sans MS;
+				cursor: pointer;
+			}
+			#customers {
+			  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+			  border-collapse: collapse;
+				width: 450px;
+				margin: 0 auto;			}
+
+			#customers td, #customers th {
+			  border: 1px solid #ddd;
+			  padding: 8px;
+			}
+
+			#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+			#customers tr:hover {background-color: #ddd;}
+
+			#customers th {
+			  padding-top: 12px;
+			  padding-bottom: 12px;
+			  text-align: left;
+			  background-color: #4CAF50;
+			  color: white;
+			}
+			  $('#myModal').on('shown.bs.modal', function () {
+			  $('#myInput').trigger('focus')
+			})
+       	</style>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	</head>
+
+	<body>
+		<!-- Button triggers modal -->
+		<button type="button" class="buttons" data-toggle="modal" data-target="#exampleModalLong">
+		  New Task
+		</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">What are you up to?</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			  </div>
+			  <div class="modal-body">
+				<div id="container">
+					<form class="forms" action="creating" method="post">
+						<fieldset>
+							<label for="task_content">Description:</label>
+							<textarea class="text" rows="4" cols="40" name="task" id="task_content"></textarea>
+
+							<input class="buttons" type="submit" value="Save changes">
+							<input class="buttons" type="reset" value="Discard changes">
+						</fieldset>
+					</form>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+
+		<div>
+			<form action="logout">
+				<input formaction="logout" class="buttons" id="LogOutButton" type="submit" value="Logout">
+			</form>
+		</div>
