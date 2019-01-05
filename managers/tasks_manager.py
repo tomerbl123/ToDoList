@@ -1,4 +1,4 @@
-from models.user import Task
+from models.task import Task
 from run import db
 
 def insert_into_db(task_description_to_insert, task_status_to_insert, the_current_user):
@@ -9,8 +9,8 @@ def insert_into_db(task_description_to_insert, task_status_to_insert, the_curren
         task_status_to_insert = '1'
     else:
         task_status_to_insert = '0'
-    NewTask = Task(task_description_to_insert, task_status_to_insert, the_current_user)
-    db.session.add(NewTask)
+    new_task = Task(task_description_to_insert, task_status_to_insert, the_current_user)
+    db.session.add(new_task)
     db.session.commit()
 
 

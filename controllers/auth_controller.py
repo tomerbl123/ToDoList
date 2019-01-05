@@ -1,13 +1,15 @@
-from flask import Blueprint
+from run import app
+from flask import Blueprint, request, redirect, url_for
+from flask_login import login_user
 from managers import auth_manager
-auth_controller = Blueprint('auth_controller', __name__)
+
+#auth_controller = Blueprint('auth_controller', __name__)
 
 
 @app.route('/auth', methods=['GET', 'POST'])
 def auth_user():
-	user_name = request.form.get('user_name')
-	password = request.form.get('password')
-
+    user_name = request.form.get('user_name')
+    password = request.form.get('password')
     result = auth_manager.auth_user(user_name, password)
 
     if result:

@@ -1,18 +1,18 @@
 from run import db, app
-from models.task import Task
 from models.user import User
+from last_controllers import create_and_return_full_html_string
 from flask import request, redirect, url_for, render_template_string, render_template
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-from controllers.task_controller import task_controller
-from controllers.user_controller import user_controller
-from controllers.auth_controller import auth_controller
+#from controllers.task_controller import task_controller
+#from controllers.user_controller import user_controller
+#from controllers.auth_controller import auth_controller
 
 login = LoginManager(app)
 login.init_app(app)
 
-app.register_blueprint(task_controller, '/task')
-app.register_blueprint(user_controller, '/user')
-app.register_blueprint(auth_controller, '/auth')
+#app.register_blueprint(task_controller, '/task')
+#app.register_blueprint(user_controller, '/user')
+#app.register_blueprint(auth_controller, '/auth')
 
 
 @login.user_loader
@@ -31,9 +31,9 @@ def logout():
 
 @app.route('/homepage', methods=['GET'])
 @login_required
-def homepage(data_base = db, class_name = Task):
+def homepage():
 	the_current_user = current_user.id
-	full_html = create_and_return_full_html_string(data_base, class_name, the_current_user)
+	full_html = create_and_return_full_html_string(the_current_user)
 	return render_template_string(full_html)
 
 
