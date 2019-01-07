@@ -2,7 +2,7 @@ from run import app
 from managers import users_manger
 from flask import request, redirect, url_for, render_template_string, render_template, Blueprint
 
-#user_controller = Blueprint('user_controller', __name__)
+user_controller = Blueprint('user_controller', __name__)
 
 @app.route('/register')
 def register():

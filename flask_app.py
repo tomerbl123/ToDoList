@@ -3,16 +3,16 @@ from models.user import User
 from last_controllers import create_and_return_full_html_string
 from flask import request, redirect, url_for, render_template_string, render_template
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-#from controllers.task_controller import task_controller
-#from controllers.user_controller import user_controller
-#from controllers.auth_controller import auth_controller
+from controllers.auth_controller import auth_controller
+from controllers.user_controller import user_controller
+from controllers.task_controller import task_controller
 
 login = LoginManager(app)
 login.init_app(app)
 
-#app.register_blueprint(task_controller, '/task')
-#app.register_blueprint(user_controller, '/user')
-#app.register_blueprint(auth_controller, '/auth')
+app.register_blueprint(task_controller)
+app.register_blueprint(user_controller)
+app.register_blueprint(auth_controller)
 
 
 @login.user_loader

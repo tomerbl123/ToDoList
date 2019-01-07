@@ -3,7 +3,7 @@ from managers import tasks_manager
 from flask import request, redirect, url_for, render_template_string, render_template, Blueprint
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 
-#task_controller = Blueprint('task_controller', __name__)
+task_controller = Blueprint('task_controller', __name__)
 
 @app.route('/creating', methods=['POST'])
 @login_required
