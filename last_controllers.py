@@ -50,7 +50,7 @@ def create_and_return_full_html_string(the_current_user):
 	"""
 	closer="""</body></html>"""
 
-	with open('C:/Users/Tomer Ben-Levi/Projects/ToDoList/templates/homepage.html', "r") as f:
+	with open('C:/ToDoList/templates/homepage.html', "r") as f:
 		text = f.read()
 
 	html_changing_part = creating_table_rows_string(the_current_user)
