@@ -3,6 +3,12 @@
 <html>
 	<head>
 		<title>ToDoList</title>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 		<style>
 			body{
 				background-color: #eee;
@@ -21,10 +27,15 @@
 			   right:10px;
 			   top:5px;
 			}
-			#container {
+			#ModalButton{
+			   position:fixed;
+			   left:10px;
+			   top:5px;
+			}
+			.container {
 				font-family: Comic Sans MS;
-				width: 600px;
-				margin: 0 auto;
+				width: 500px;
+				margin: 10px auto;
 			}
 			h1 {
 				text-align: center
@@ -60,7 +71,7 @@
 				float: 5=left;
 				margin-top: 5px;
 			}
-			form input[type="submit"], input[type="reset"] {
+			form input[type="submit"], input[type="reset"], button[type="button"] {
 				border: none;
 				background-color: #FFF5EE;
 				height: 25px;
@@ -69,70 +80,87 @@
 				font-family: Comic Sans MS;
 				cursor: pointer;
 			}
+			  $('#myModal').on('shown.bs.modal', function () {
+			  $('#myInput').trigger('focus')
+			})
        	</style>
+
 	</head>
 
 	<body>
-		<div id="container">
-			<h1>Welcome to your ToDoList app</h1>
+		<h1>Welcome to your ToDoList app</h1>
 
-			<form class="forms" action="creating" method="post">
-				<fieldset>
-					<legend><strong>Add New Task</strong></legend>
+		<!-- Button triggers modal -->
+		<button type="button" id="ModalButton" data-toggle="modal" data-target="#Modal">
+		  Handle Tasks
+		</button>
 
-					<label for="task_content">Description:</label>
-					<textarea class="text" rows="4" cols="50" name="task" id="task_content"></textarea>
+		<!-- Modal -->
+		<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
 
-					<input class="buttons" type="submit" value="Save changes">
-					<input class="buttons" type="reset" value="Discard changes">
-				</fieldset>
-			</form>
+				<!-- Add Task-->
+				<div class="container">
+					<form class="forms" action="creating" method="post">
+						<fieldset>
+							<legend><strong>Add New Task</strong></legend>
+
+							<label for="task_content">Description:</label>
+							<textarea class="text" rows="4" cols="30" name="task" id="task_content"></textarea>
+
+							<input class="buttons" type="submit" value="Save changes">
+							<input class="buttons" type="reset" value="Discard changes">
+						</fieldset>
+					</form>
+				</div>
+
+				<!-- Edit Task-->
+				<div class="container">
+					<form class="forms" action="updating" method="post">
+						<fieldset>
+							<legend><strong>Editing a Task</strong></legend>
+
+							<label>Task's Number(limited to one):</label>
+							<input class="text" type="text" name="task_id">
+
+							<label>Description:</label>
+							<textarea class="text" rows="4" cols="30" name="new_task"></textarea>
+
+							<input class="checkbox" type="checkbox" name="is_done" value="yes">
+							<label>Mark as Done</label>
+
+							<br>
+
+							<input class="buttons" type="submit" value="Save changes">
+							<input class="buttons" type="reset" value="Discard changes">
+						</fieldset>
+					</form>
+				</div>
+
+				<!-- Remove Task-->
+				<div class="container">
+					<form class="forms" action="removing" method="post">
+						<fieldset>
+							<legend><strong>Deleting a Task</strong></legend>
+
+							<label>Task's Number(limited to one):</label>
+							<input class="text" type="text" name="task_id">
+
+							<input class="buttons" type="submit" value="Save changes">
+							<input class="buttons" type="reset" value="Discard changes">
+						</fieldset>
+					</form>
+				</div>
+
+			<!--End of the Modal-->
+			</div>
+		  </div>
 		</div>
 
-		<br><br><br>
-
-		<div id="container">
-			<form class="forms" action="updating" method="post">
-				<fieldset>
-					<legend><strong>Editing a Task</strong></legend>
-
-					<label>Task's Number(limited to one):</label>
-					<input class="text" type="text" name="task_id">
-
-					<label>Description:</label>
-					<textarea class="text" rows="4" cols="50" name="new_task"></textarea>
-
-					<input class="checkbox" type="checkbox" name="is_done" value="yes">
-					<label>Mark as Done</label>
-
-					<br><br>
-
-					<input class="buttons" type="submit" value="Save changes">
-					<input class="buttons" type="reset" value="Discard changes">
-				</fieldset>
-			</form>
-		</div>
-
-		<br><br><br>
-
-		<div id="container">
-			<form class="forms" action="removing" method="post">
-				<fieldset>
-					<legend><strong>Deleting a Task</strong></legend>
-
-					<label>Task's Number(limited to one):</label>
-					<input class="text" type="text" name="task_id">
-
-					<input class="buttons" type="submit" value="Save changes">
-					<input class="buttons" type="reset" value="Discard changes">
-				</fieldset>
-			</form>
-		</div>
-
+		<!-- LogOut Button-->
 		<div>
 			<form action="logout">
 				<input formaction="logout" class="buttons" id="LogOutButton" type="submit" value="Logout">
 			</form>
 		</div>
-
-		<br><br><br>
