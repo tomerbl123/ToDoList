@@ -22,14 +22,14 @@ def creating_table_rows_string(the_current_user):
 		for item in data_not_done:
 			text = "<tr><td>{0}</td><td>{1}</td></tr>".format(item[0], item[1])
 			not_done_tasks_list.append(text)
-		not_done_tasks_list.append("""</table><br><br>""")
+		not_done_tasks_list.append("""</table>""")
 	else:
-		not_done_tasks_list.append("""<h2>Nothing to do...</h2><br>""")
+		not_done_tasks_list.append("""<h2>Nothing to do...</h2>""")
 
 	#Creating the Done tasks' table (no tasks -> no table).
 	if amount_if_done_tasks > 0:
 		data_done = db.session.query(Task.id, Task.task, Task.isdone).filter_by(user_id=the_current_user, isdone='1')
-		done_tasks_list.append("""<h2>Done Tasks:</h2><table><tr><th>Number</th><th>Description</th></tr>""")
+		done_tasks_list.append("""<h2>Great Success!</h2><table><tr><th>Number</th><th>Description</th></tr>""")
 		for item in data_done:
 			text = "<tr><td>{0}</td><td>{1}</td></tr>".format(item[0], item[1])
 			done_tasks_list.append(text)

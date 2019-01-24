@@ -16,6 +16,7 @@
 				font-family: Comic Sans MS;
 			}
 	        table {
+	        	background-color: #AFEEEE;
 	            border-collapse: collapse;
  				margin-left: auto;
  				margin-right: auto;
@@ -26,8 +27,11 @@
 	            text-align: center;
 	            padding: 1px;
 	        }
+	        th {
+	        background-color: #F08080;
+	        }
 	        tr:hover {
-	        background-color: #f5f5f5;
+	        background-color: #eee;
 	        }
 	        #LogOutButton{
 			   position:fixed;
@@ -44,6 +48,8 @@
 				margin: 10px auto;
 			}
 			h1, h2 {
+				margin-top: 100px;
+				font-size: 24px;
 				text-align: center
 			}
 			.forms {
@@ -91,8 +97,6 @@
 	</head>
 
 	<body>
-		<h1>Welcome to your ToDoList app</h1>
-
 		<!-- Button triggers modal -->
 		<button type="button" id="ModalButton" data-toggle="modal" data-target="#Modal">
 		  Handle Tasks
