@@ -19,6 +19,7 @@ app.register_blueprint(auth_controller)
 def load_user(id):
 	return User.query.get(int(id))
 
+@app.route('/')
 @app.route('/login')
 def login():
 	return render_template('login.html')
