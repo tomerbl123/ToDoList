@@ -15,6 +15,11 @@
 				color: #333;
 				font-family: Comic Sans MS;
 			}
+			h1, h2 {
+				margin-top: 100px;
+				font-size: 24px;
+				text-align: center
+			}
 	        table {
 	        	background-color: #AFEEEE;
 	            border-collapse: collapse;
@@ -28,10 +33,10 @@
 	            padding: 1px;
 	        }
 	        th {
-	        background-color: #F08080;
+	        	background-color: #F08080;
 	        }
 	        tr:hover {
-	        background-color: #eee;
+	        	background-color: #eee;
 	        }
 	        #LogOutButton{
 			   position:fixed;
@@ -47,10 +52,9 @@
 				width: 500px;
 				margin: 10px auto;
 			}
-			h1, h2 {
-				margin-top: 100px;
-				font-size: 24px;
-				text-align: center
+			.checkbox {
+				float: 5=left;
+				margin-top: 5px;
 			}
 			.forms {
 				background-color: #AFEEEE;
@@ -58,13 +62,13 @@
 				font-family: Comic Sans MS;
 				border: solid 1px black;
 			}
-			.forms fieldset {
+			.fieldset {
 				background-color: #F08080;
 				padding: 30px;
 				border: solid 1px white;
 				font-size: 18px;
 			}
-			.forms legend {
+			.legend {
 				border: solid 1px #333;
 				background-color: #F08080;
 				padding: 5px;
@@ -72,7 +76,7 @@
 				fond-weight: bold;
 				width: auto;
 			}
-			form .text {
+			.text {
 				display: block;
 				margin-bottom: 20px;
 				font-size: 15px;
@@ -80,11 +84,7 @@
 				border: solid 1px #b90707;
 				background-color: #FFF5EE
 			}
-			.checkbox {
-				float: 5=left;
-				margin-top: 5px;
-			}
-			form input[type="submit"], input[type="reset"], button[type="button"] {
+			.buttons {
 				border: none;
 				background-color: #FFF5EE;
 				height: 25px;
@@ -98,7 +98,7 @@
 
 	<body>
 		<!-- Button triggers modal -->
-		<button type="button" id="ModalButton" data-toggle="modal" data-target="#Modal">
+		<button class="buttons" type="button" id="ModalButton" data-toggle="modal" data-target="#Modal">
 		  Handle Tasks
 		</button>
 
@@ -110,8 +110,8 @@
 				<!-- Add Task-->
 				<div class="container">
 					<form class="forms" action="creating" method="post">
-						<fieldset>
-							<legend><strong>Add New Task</strong></legend>
+						<fieldset class="fieldset">
+							<legend class="legend"><strong>Add New Task</strong></legend>
 
 							<label for="task_content">Description:</label>
 							<textarea class="text" rows="4" cols="30" name="task" id="task_content"></textarea>
@@ -125,8 +125,8 @@
 				<!-- Edit Task-->
 				<div class="container">
 					<form class="forms" action="updating" method="post">
-						<fieldset>
-							<legend><strong>Editing a Task</strong></legend>
+						<fieldset class="fieldset">
+							<legend class="legend"><strong>Editing a Task</strong></legend>
 
 							<label>Task's Number(limited to one):</label>
 							<input class="text" type="text" name="task_id">
@@ -148,8 +148,8 @@
 				<!-- Remove Task-->
 				<div class="container">
 					<form class="forms" action="removing" method="post">
-						<fieldset>
-							<legend><strong>Deleting a Task</strong></legend>
+						<fieldset class="fieldset">
+							<legend class="legend"><strong>Deleting a Task</strong></legend>
 
 							<label>Task's Number(limited to one):</label>
 							<input class="text" type="text" name="task_id">
