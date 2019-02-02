@@ -1,6 +1,6 @@
 from run import db, app
 from models.user import User
-from last_controllers import create_and_return_full_html_string
+from last_controllers import get_done_tasks_list, get_incomplete_tasks_list
 from flask import request, redirect, url_for, render_template_string, render_template
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from controllers.auth_controller import auth_controller
@@ -34,8 +34,11 @@ def logout():
 @login_required
 def homepage():
 	the_current_user = current_user.id
-	full_html = create_and_return_full_html_string(the_current_user)
-	return render_template_string(full_html)
+
+	incomplete_tasks = get_incomplete_tasks_list(the_current_user)
+	done_tasks = get_done_tasks_list(the_current_user)
+
+	return render_template('homepage.html', done_tasks = done_tasks, incomplete_tasks = incomplete_tasks)
 
 
 if __name__=='__main__':
