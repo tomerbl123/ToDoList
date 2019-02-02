@@ -15,8 +15,8 @@
 				color: #333;
 				font-family: Comic Sans MS;
 			}
-			h1, h2 {
-				margin-top: 100px;
+			h2 {
+				margin-top: 150px;
 				font-size: 24px;
 				text-align: center
 			}
@@ -26,6 +26,7 @@
  				margin-left: auto;
  				margin-right: auto;
  				width: 70%;
+ 				margin-bottom: 150px;
  			}
 	        td, th {
 	            border: 2px solid #333;
@@ -171,3 +172,62 @@
 				<input formaction="logout" class="buttons" id="LogOutButton" type="submit" value="Logout">
 			</form>
 		</div>
+
+		<!--Table of all incomplete tasks-->
+		<table id="IncompleteTasks">
+		</table>
+
+		<!--Table of all done tasks-->
+		<table id="DoneTasks">
+		</table>
+
+	<script type='text/javascript'>
+		var doneTasksArray = {{ done_tasks | safe }}
+		var incompleteTasksArray = {{ incomplete_tasks | safe }}
+
+		function incompleteTasksToTable(table, array){
+			if(array.length === 0){
+				var noTasksHeadline = document.createElement('h2');
+				noTasksHeadline.innerHTML = "<h2>Nothing To Do..</h2>";
+				table.parentNode.replaceChild(noTasksHeadline, table);
+			}
+			else{
+				var tableData = "<thead><tr><th>Number</th><th>Description</th></tr></thead><tbody>";
+				var tasksHeadline = document.createElement('h2');
+				tasksHeadline.innerHTML = "<h2>What Should I do?</h2>";
+				for(i=0; i<array.length; i++){
+					tableData += "<tr>";
+					tableData += "<td>" + Object.keys(array[i])[0] + "</td>";
+					tableData += "<td>" + Object.values(array[i])[0] + "</td>";
+					tableData += "</tr>";
+				}
+			tableData += "</tbody>";
+			table.innerHTML = tableData;
+			document.body.insertBefore(tasksHeadline, table);
+			}}
+
+		function doneTasksToTable(table, array){
+			if(array.length === 0){
+				table.parentNode.removeChild(table);
+			}
+			else{
+				var tableData = "<thead><tr><th>Number</th><th>Description</th></tr></thead><tbody>";
+				var doneTasksHeadline = document.createElement('h2');
+				doneTasksHeadline.innerHTML = "<h2>Great Success!</h2>";
+				for(i=0; i<array.length; i++){
+					tableData += "<tr>";
+					tableData += "<td>" + Object.keys(array[i])[0] + "</td>";
+					tableData += "<td>" + Object.values(array[i])[0] + "</td>";
+					tableData += "</tr>";
+				}
+			tableData += "</tbody>";
+			table.innerHTML = tableData;
+			document.body.insertBefore(doneTasksHeadline, table);
+			}}
+
+		incompleteTasksToTable(IncompleteTasks, incompleteTasksArray)
+		doneTasksToTable(DoneTasks, doneTasksArray)
+	</script>
+
+	</body>
+</html>
