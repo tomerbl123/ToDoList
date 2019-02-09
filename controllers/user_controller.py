@@ -15,6 +15,6 @@ def create_new_user():
 	new_user = request.form.get('user_name')
 	password = request.form.get('password')
 
-	users_manger.create_user(name, new_user, password)
+	users_manger.create_user(name.lower(), new_user.lower(), password)
 
 	return redirect(url_for('login'))

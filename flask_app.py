@@ -40,6 +40,6 @@ def homepage():
 	return render_template('homepage.html', done_tasks = done_tasks, incomplete_tasks = incomplete_tasks)
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
 	db.create_all()
 	app.run()
