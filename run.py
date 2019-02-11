@@ -5,7 +5,7 @@ app=Flask('__name__')
 
 app.config.update(
 	SECRET_KEY='topsecret',
-	SQLALCHEMY_DATABASE_URI='postgres://ddbkzqemmhbsfe:473523aa042702f7e7b6e763df7e59600a7f4dcdfd4ea2280b075f6bc61d7939@ec2-54-217-208-105.eu-west-1.compute.amazonaws.com:5432/danqr65is0894t',
+	SQLALCHEMY_DATABASE_URI='postgres://ienoldtxeklqyu:6791e4f04297cc8862dfd31697be0505bf64d8b64c6747ae17b69c149613a6b5@ec2-79-125-4-96.eu-west-1.compute.amazonaws.com:5432/dagofqd7saj392',
 	SQLALCHEMY_TRACK_MODIFICATIONS=False,
     DEBUG = True,
 	use_reloader=False)
