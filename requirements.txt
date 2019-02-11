@@ -3,3 +3,4 @@ Flask-SQLAlchemy == 2.3.2
 SQLAlchemy == 1.2.14
 html2text == 2018.1.9
 flask-login == 0.4.1
+gunicorn == 18.0
