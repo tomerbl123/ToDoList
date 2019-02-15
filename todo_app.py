@@ -1,4 +1,4 @@
-from run import db, app
+from run import app
 from models.user import User
 from flask import request, redirect, url_for, render_template
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
