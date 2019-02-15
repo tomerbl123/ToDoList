@@ -11,3 +11,4 @@ app.config.update(
 	use_reloader=False)
 
 db=SQLAlchemy(app)
+db.create_all()
