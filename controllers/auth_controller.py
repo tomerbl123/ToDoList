@@ -17,6 +17,8 @@ def auth_user():
 
     if result:
         login_user(user)
+        print('Successful login for {}'.format(user))
         return redirect(url_for('homepage'))
     else:
+        print('Wrong Username or Password for user {}'.format(user))
         return redirect(url_for('login'))
