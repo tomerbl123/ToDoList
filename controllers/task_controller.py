@@ -9,7 +9,6 @@ task_controller = Blueprint('task_controller', __name__)
 @login_required
 def create_task():
 	task_description_to_insert = request.form.get('task')
-	#task_status_to_insert = request.form.get('is_done')
 
 	the_current_user = current_user.id
 
