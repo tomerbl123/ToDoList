@@ -1,4 +1,4 @@
-from run import app
+from run import db, app
 from models.user import User
 from flask import request, redirect, url_for, render_template
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
@@ -41,4 +41,5 @@ def homepage():
 
 
 if __name__ == '__main__':
-	app.run()
+	db.create_all()
+  app.run()

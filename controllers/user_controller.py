@@ -10,7 +10,7 @@ def register():
 
 
 @app.route('/new_user', methods=['POST'])
-def create_new_user():
+def create_new_user():	
 	name = request.form.get('name')
 	new_user = request.form.get('user_name')
 	password = request.form.get('password')
