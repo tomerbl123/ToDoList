@@ -1,5 +1,6 @@
 from run import db
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class User(UserMixin, db.Model):
 	"""
@@ -14,7 +15,15 @@ class User(UserMixin, db.Model):
 
 	db.relationship("Tasks")
 
-	def __init__(self, name=None, user_name=None, password=None):
-		self.name=name
-		self.user_name=user_name
-		self.password=password
+	def __init__(self, name, user_name, password):
+		self.name = name
+		self.user_name = user_name
+		self.password = password
+
+	@staticmethod
+	def set_password(password):
+		return generate_password_hash(password)
+
+	@staticmethod
+	def check_password(restored_password, login_given_password):
+		return check_password_hash(restored_password, login_given_password)
