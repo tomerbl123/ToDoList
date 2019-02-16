@@ -9,7 +9,12 @@
 				background-color: #eee;
 				color: #333;
 			}
-			#container {
+			#registerPageLink {
+				margin-top: 5px;
+				font-size: 13px;
+				cursor: pointer;
+			}
+			.container {
 				font-family: Comic Sans MS;
 				width: 600px;
 				margin: 0 auto;
@@ -20,20 +25,20 @@
 				font-family: Comic Sans MS;
 				border: solid 1px black;
 			}
-			.forms fieldset {
+			.fieldset {
 				background-color: #F08080;
 				padding: 30px;
 				border: solid 1px white;
 				font-size: 18px;
 			}
-			.forms legend {
+			.legend {
 				border: solid 1px #333;
 				background-color: #F08080;
 				padding: 5px;
 				font-size: 20px;
 				fond-weight: bold;
 			}
-			form .text {
+			.text {
 				display: block;
 				margin-bottom: 20px;
 				font-size: 15px;
@@ -41,7 +46,7 @@
 				border: solid 1px #b90707;
 				background-color: #FFF5EE
 			}
-			form input[type="submit"], input[type="reset"] {
+			.buttons {
 				border: none;
 				background-color: #FFF5EE;
 				height: 25px;
@@ -50,18 +55,14 @@
 				font-family: Comic Sans MS;
 				cursor: pointer;
 			}
-			#registerPageLink {
-				font-size: 13px;
-				cursor: pointer;
-			}
        	</style>
 	</head>
 
 	<body>
-		<div id="container">
+		<div class="container">
 			<form class="forms" action="auth" method="post">
-				<fieldset>
-					<legend><strong>Insert Username and Password</strong></legend>
+				<fieldset class="fieldset">
+					<legend class="legend"><strong>Insert Username and Password</strong></legend>
 
 					<label for="username">Username</label>
 					<input type="text" name="user_name" id="username" class="text">
@@ -72,7 +73,7 @@
 					<input type="submit" value="Login" class="buttons">
 					<input type="reset" value="Discard" class="buttons">
 
-					<br><br>
+					<br>
 
 					<a id="registerPageLink" href="register">Still not a member? Register now</a>
 				</fieldset>

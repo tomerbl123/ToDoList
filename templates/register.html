@@ -9,7 +9,11 @@
 				background-color: #eee;
 				color: #333;
 			}
-			#container {
+			#goBackToLogin {
+				font-size: 13px;
+				cursor: pointer;
+			}
+			.container {
 				font-family: Comic Sans MS;
 				width: 600px;
 				margin: 0 auto;
@@ -20,20 +24,20 @@
 				font-family: Comic Sans MS;
 				border: solid 1px black;
 			}
-			.forms fieldset {
+			.fieldset {
 				background-color: #F08080;
 				padding: 30px;
 				border: solid 1px white;
 				font-size: 18px;
 			}
-			.forms legend {
+			.legend {
 				border: solid 1px #333;
 				background-color: #F08080;
 				padding: 5px;
 				font-size: 20px;
 				fond-weight: bold;
 			}
-			form .text {
+			.text {
 				display: block;
 				margin-bottom: 20px;
 				font-size: 15px;
@@ -41,7 +45,7 @@
 				border: solid 1px #b90707;
 				background-color: #FFF5EE
 			}
-			form input[type="submit"], input[type="reset"] {
+			.buttons {
 				border: none;
 				background-color: #FFF5EE;
 				height: 25px;
@@ -50,18 +54,14 @@
 				font-family: Comic Sans MS;
 				cursor: pointer;
 			}
-			#goBackToLogin {
-				font-size: 13px;
-				cursor: pointer;
-			}
        	</style>
 	</head>
 
 	<body>	
-		<div id="container">
+		<div class="container">
 			<form action="new_user" method="post" class="forms">
-				<fieldset>
-					<legend><strong>Please fill in the details below</strong></legend>
+				<fieldset class="fieldset">
+					<legend class="legend"><strong>Please fill in the details below</strong></legend>
 
 					<label for="name">Name</label>
 					<input class="text" type="text" name="name" id="name">
@@ -72,12 +72,10 @@
 					<label for="password">Password</label><br>
 					<input class="text" type="password" name="password" id="password">
 
+					<input type="submit" value="Register" class="buttons">
+					<input type="reset" value="Discard" class="buttons">
+
 					<br>
-
-					<input type="submit" value="Register">
-					<input type="reset" value="Discard">
-
-					<br><br>
 
 					<a id="goBackToLogin" href="login">Go back to the login page</a>
 				</fieldset>
