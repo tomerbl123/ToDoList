@@ -17,4 +17,6 @@ def create_new_user():
 
 	users_manger.create_user(name, new_user, password)
 
+	print("Successfully created user: {}".format(name))
+
 	return redirect(url_for('login'))

@@ -14,6 +14,9 @@ def create_task():
 	the_current_user = current_user.id
 
 	tasks_manager.insert_into_db(task_description_to_insert, task_status_to_insert, the_current_user)
+
+	print("Successfully added task for user: {}".format(current_user.id))
+
 	return redirect(url_for('homepage'))
 
 @app.route('/updating', methods=['POST'])
@@ -22,7 +25,11 @@ def update_task():
 	task_id = request.form.get('task_id')
 	new_task = request.form.get('new_task')
 	is_done = request.form.get('is_done')
-	tasks_manager.edit_task(task_id, is_done, new_task,)
+
+	tasks_manager.edit_task(task_id, is_done, new_task)
+
+	print("Edited task successfully")
+
 	return redirect(url_for('homepage'))
 
 @app.route('/removing', methods=['POST'])
@@ -30,4 +37,7 @@ def update_task():
 def remove_task():
 	task_id = request.form.get('task_id')
 	tasks_manager.remove_task_from_db(task_id)
+
+	print("Deleted task successfully")
+
 	return redirect(url_for('homepage'))

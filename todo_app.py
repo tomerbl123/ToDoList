@@ -41,5 +41,6 @@ def homepage():
 
 
 if __name__ == '__main__':
+	print("Running App Locally, about to create DB tables.")
 	db.create_all()
 	app.run()
