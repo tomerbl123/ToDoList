@@ -1,7 +1,7 @@
 from run import app
 from managers import tasks_manager
-from flask import request, redirect, url_for, render_template_string, render_template, Blueprint
-from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from flask import request, redirect, url_for, Blueprint
+from flask_login import login_required, current_user
 
 task_controller = Blueprint('task_controller', __name__)
 
@@ -9,11 +9,11 @@ task_controller = Blueprint('task_controller', __name__)
 @login_required
 def create_task():
 	task_description_to_insert = request.form.get('task')
-	task_status_to_insert = request.form.get('is_done')
+	#task_status_to_insert = request.form.get('is_done')
 
 	the_current_user = current_user.id
 
-	tasks_manager.insert_into_db(task_description_to_insert, task_status_to_insert, the_current_user)
+	tasks_manager.add_task_to_db(task_description_to_insert, the_current_user)
 
 	print("Successfully added task for user: {}".format(current_user.id))
 
