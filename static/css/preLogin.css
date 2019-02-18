@@ -7,15 +7,19 @@ body{
     font-size: 13px;
     cursor: pointer;
 }
+#goBackToLogin {
+    font-size: 13px;
+    cursor: pointer;
+}
 .container {
-    font-family: Comic Sans MS;
+    font-family: 'Courgette', cursive;
     width: 600px;
     margin: 0 auto;
 }
 .forms {
     background-color: #AFEEEE;
     padding: 10px;
-    font-family: Comic Sans MS;
+    font-family: 'Courgette', cursive;
     border: solid 1px black;
 }
 .fieldset {
@@ -45,6 +49,6 @@ body{
     height: 25px;
     padding: 0 15px;
     font-size: 15px;
-    font-family: Comic Sans MS;
+    font-family: 'Courgette', cursive;
     cursor: pointer;
 }

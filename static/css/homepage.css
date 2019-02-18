@@ -1,7 +1,7 @@
 body {
     background-color: #eee;
     color: #333;
-    font-family: Comic Sans MS;
+    font-family: 'Courgette', cursive;
 }
 h2 {
     margin-top: 150px;
@@ -48,7 +48,6 @@ tr:hover {
 .forms {
     background-color: #AFEEEE;
     padding: 10px;
-    font-family: Comic Sans MS;
     border: solid 1px black;
 }
 .fieldset {
@@ -79,6 +78,5 @@ tr:hover {
     height: 25px;
     padding: 0 15px;
     font-size: 15px;
-    font-family: Comic Sans MS;
     cursor: pointer;
 }
