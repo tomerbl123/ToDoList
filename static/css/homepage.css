@@ -1,0 +1,82 @@
+body {
+    background-color: #eee;
+    color: #333;
+    font-family: 'Courgette', cursive;
+}
+h2 {
+    margin-top: 150px;
+    font-size: 24px;
+    text-align: center
+}
+table {
+    background-color: #AFEEEE;
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    margin-bottom: 150px;
+}
+td, th {
+    border: 2px solid #333;
+    text-align: center;
+    padding: 1px;
+}
+th {
+    background-color: #F08080;
+}
+tr:hover {
+    background-color: #eee;
+}
+#LogOutButton {
+    position:fixed;
+    right:10px;
+    top:5px;
+}
+#ModalButton{
+    position:fixed;
+    left:10px;
+    top:5px;
+}
+.container {
+    width: 500px;
+    margin: 10px auto;
+}
+.checkbox {
+    float: 5=left;
+    margin-top: 5px;
+}
+.forms {
+    background-color: #AFEEEE;
+    padding: 10px;
+    border: solid 1px black;
+}
+.fieldset {
+    background-color: #F08080;
+    padding: 30px;
+    border: solid 1px white;
+    font-size: 18px;
+}
+.legend {
+    border: solid 1px #333;
+    background-color: #F08080;
+    padding: 5px;
+    font-size: 20px;
+    fond-weight: bold;
+    width: auto;
+}
+.text {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 15px;
+    font-family: Helvetica, Arial, sans-serif;
+    border: solid 1px #b90707;
+    background-color: #FFF5EE
+}
+.buttons {
+    border: none;
+    background-color: #FFF5EE;
+    height: 25px;
+    padding: 0 15px;
+    font-size: 15px;
+    cursor: pointer;
+}
