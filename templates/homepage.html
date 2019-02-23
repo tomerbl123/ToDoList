@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="./static/css/homepage.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Courgette">
 
+		<script src="./static/js/homepage.js"></script>
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -100,46 +101,6 @@
 	<script type='text/javascript'>
 		var doneTasksArray = {{ done_tasks | safe }}
 		var incompleteTasksArray = {{ incomplete_tasks | safe }}
-
-		function incompleteTasksToTable(table, array){
-			if(array.length === 0){
-				var noTasksHeadline = document.createElement('h2');
-				noTasksHeadline.innerHTML = "<h2>Nothing To Do..</h2>";
-				table.parentNode.replaceChild(noTasksHeadline, table);
-			}
-			else{
-				var tableData = "<thead><tr><th>Number</th><th>Description</th></tr></thead><tbody>";
-				var tasksHeadline = document.createElement('h2');
-				tasksHeadline.innerHTML = "<h2>What Should I do?</h2>";
-				for(i=0; i<array.length; i++){
-					tableData += "<tr>";
-					tableData += "<td>" + Object.keys(array[i])[0] + "</td>";
-					tableData += "<td>" + Object.values(array[i])[0] + "</td>";
-					tableData += "</tr>";
-				}
-			tableData += "</tbody>";
-			table.innerHTML = tableData;
-			document.body.insertBefore(tasksHeadline, table);
-			}}
-
-		function doneTasksToTable(table, array){
-			if(array.length === 0){
-				table.parentNode.removeChild(table);
-			}
-			else{
-				var tableData = "<thead><tr><th>Number</th><th>Description</th></tr></thead><tbody>";
-				var doneTasksHeadline = document.createElement('h2');
-				doneTasksHeadline.innerHTML = "<h2>Great Success!</h2>";
-				for(i=0; i<array.length; i++){
-					tableData += "<tr>";
-					tableData += "<td>" + Object.keys(array[i])[0] + "</td>";
-					tableData += "<td>" + Object.values(array[i])[0] + "</td>";
-					tableData += "</tr>";
-				}
-			tableData += "</tbody>";
-			table.innerHTML = tableData;
-			document.body.insertBefore(doneTasksHeadline, table);
-			}}
 
 		incompleteTasksToTable(IncompleteTasks, incompleteTasksArray)
 		doneTasksToTable(DoneTasks, doneTasksArray)
